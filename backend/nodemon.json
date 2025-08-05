@@ -1,0 +1,14 @@
+{
+  "watch": ["server.js"],
+  "ignore": [
+    "user_answers/**/*",
+    "tutor_explanations/**/*",
+    "generated_quizzes/**/*",
+    "extracted_text/**/*",
+    "input_pdfs/**/*",
+    "flashcards/**/*",
+    "*.json",
+    "temp/*"
+  ],
+  "ext": "js"
+}

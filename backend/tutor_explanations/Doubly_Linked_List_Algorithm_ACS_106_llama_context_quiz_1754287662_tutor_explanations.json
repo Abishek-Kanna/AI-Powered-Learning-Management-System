@@ -1,0 +1,15 @@
+[
+  {
+    "index": 1,
+    "question": "What is the primary characteristic that distinguishes a doubly linked list from a singly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It only allows forward traversal.",
+      "B": "It contains pointers to both the next and previous nodes.",
+      "C": "It is less efficient for data storage.",
+      "D": "It only stores numerical data."
+    },
+    "explanation": "Okay, let’s break down this question and why the answer is B. It’s great that you didn’t provide an answer – that’s a step in the right direction!\n\n**Here’s the explanation:**\n\nThe core difference between a singly linked list and a doubly linked list lies in how they’re connected. \n\n* **Singly Linked List:** Think of a one-way street. Each node in a singly linked list only has a pointer that points to the *next* node in the sequence. You can only travel forward through the list, from one node to the next.\n\n* **Doubly Linked List:** Now imagine a two-way street! Each node in a doubly linked list has *two* pointers: one that points to the *next* node, and another that points to the *previous* node. This allows you to move both forwards *and* backwards through the list.\n\n\n**Why Option B is correct:**\n\nBecause a doubly linked list has pointers to *both* the next and previous nodes, that's exactly what distinguishes it from a singly linked list, which only has a pointer to the next node. \n\n**Why the other options are wrong:**\n\n* **A) It only allows forward traversal.**  This describes a *singly* linked list, not a doubly linked list.\n* **C) It is less efficient for data storage.**  The efficiency of data storage is generally not a defining characteristic.  Both types of lists store data in a similar way.\n* **D) It only stores numerical data.**  Linked lists can store *any* kind of data – numbers, strings, objects, whatever you need! This is completely irrelevant to the question.\n\n**In simple terms:**  A doubly linked list is like a chain with links on both sides, while a singly linked list is like a chain with links only on one side. \n\nDo you want to try another question about linked lists, or would you like me to explain this concept further with a diagram or an example?"
+  }
+]

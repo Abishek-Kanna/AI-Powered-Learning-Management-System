@@ -1,0 +1,28 @@
+[
+  {
+    "index": 1,
+    "question": "What is the primary characteristic that distinguishes a doubly linked list from a singly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It only allows forward traversal.",
+      "B": "It contains pointers to both the next and previous nodes.",
+      "C": "It is less efficient for data storage.",
+      "D": "It only stores numerical data."
+    },
+    "explanation": "Okay, let's break down this question and why the answer is B. It’s great you’re tackling this – understanding linked lists is a really important concept in data structures!\n\n**Let's start with why option B is correct:**\n\nA doubly linked list is *specifically* designed to allow traversal in *both* directions – forward and backward. Think of it like a road with lanes going in both directions.  Each node in a doubly linked list has not just a pointer to the *next* node in sequence, but also a pointer to the *previous* node. This means you can easily move forward *and* backward through the list.\n\n**Now, let’s look at why the other options are incorrect:**\n\n*   **A) It only allows forward traversal.** This is completely wrong. That's the key difference between a doubly linked list and a *singly* linked list.\n*   **C) It is less efficient for data storage.** Linked lists are generally very efficient for storage compared to arrays, so this is incorrect.\n*   **D) It only stores numerical data.**  Linked lists can store *any* kind of data – numbers, strings, objects, anything you want!  The data type isn't what makes it a linked list; it's the way the nodes are connected.\n\n\n**Think of it like this:**\n\nImagine a chain of paper links.\n\n*   **Singly Linked List:**  You can only walk forward, one link at a time.\n*   **Doubly Linked List:** You can walk forward *and* backward along the chain.\n\n\n\n**To help you understand even further:**\n\nDo you want to try a quick example?  Let’s say you have a list of your favorite songs.\n\n*   With a *singly* linked list, you could only go through the list in the order you created the playlist.\n*   With a *doubly* linked list, you could easily go back to the song you played before, or jump to the beginning of the list.\n\nDo you want me to explain this concept with a simple code example (perhaps in Python) to illustrate how the pointers work? Would you like to try another similar question to test your understanding?"
+  },
+  {
+    "index": 2,
+    "question": "Which of the following best describes the role of a node in a doubly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It solely stores data values.",
+      "B": "It maintains pointers to the next and previous nodes.",
+      "C": "It only facilitates forward traversal.",
+      "D": "It is a placeholder for data management."
+    },
+    "explanation": "Okay, let's tackle this question about doubly linked lists! It's a really important concept, and it's great that you're working through it.\n\n**Here’s the breakdown:**\n\n**Why Option B is Correct:**\n\nA node in a doubly linked list is *fundamentally* designed to connect to both the node before it and the node after it.  Think of it like two links connected to a single data point. \n\n* **Pointers are Key:**  Each node holds two pointers: one pointing to the *next* node in the sequence, and another pointing to the *previous* node. This bidirectional connection is what makes it a ‘doubly’ linked list.\n* **Traversal is Easier:** Because of these pointers, you can easily move forward *and* backward through the list. This is much more efficient than a singly linked list where you're limited to only going in one direction.\n\n\n**Why Your Initial Answer (No Answer Provided) Was Incorrect:**\n\nSimply storing data (Option A) is a *part* of what a node does, but it's not its *primary* role.  Nodes aren't just containers for data; they are the building blocks that *connect* those data values together.\n\nOption C (only facilitates forward traversal) is incorrect because a doubly linked list allows movement in *both* directions. \n\nOption D (a placeholder for data management) is a vague description and doesn't capture the core functionality of a node in a doubly linked list.\n\n**Let's use an analogy:**\n\nImagine a chain. Each link (the node) holds a piece of metal (the data) and is connected to both the link before it and the link after it.  You can easily move both ways along the chain.\n\n---\n\n**Resources for further understanding:**\n\n*   **Khan Academy - Linked Lists:** [https://www.khanacademy.org/computing/computer-science/linked-lists](https://www.khanacademy.org/computing/computer-science/linked-lists)\n*   **GeeksforGeeks - Doubly Linked List:** [https://www.geeksforgeeks.org/doubly-linked-list/](https://www.geeksforgeeks.org/doubly-linked-list/)\n\n\nDo you want to try another question related to data structures, or would you like me to explain this concept further with a simple code example (e.g., in Python)?"
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "index": 1,
+    "question": "What is the primary characteristic that distinguishes a doubly linked list from a singly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It only allows forward traversal.",
+      "B": "It contains pointers to both the next and previous nodes.",
+      "C": "It is less efficient for data storage.",
+      "D": "It only stores numerical data."
+    },
+    "explanation": "Okay, let’s break down this question about linked lists. It’s a really common point of confusion, so don’t worry – we’ll get it sorted out!\n\n**The Correct Answer and Why It’s Right**\n\nThe correct answer is **B) It contains pointers to both the next and previous nodes.**\n\nLet's think about what a linked list *is*. A linked list is a way to store a sequence of items (like numbers, words, or anything else) in a computer.  Unlike an array where the items are stored in contiguous memory locations, a linked list stores items in separate memory locations. The key difference is that each item in a linked list has a 'link' that points to the *next* item in the list.\n\n**But a doubly linked list goes further!** It has *two* links – one pointing to the next node and one pointing to the *previous* node. This creates a cycle, allowing you to move both forwards *and* backwards through the list.  This is incredibly useful for things like implementing undo/redo functionality or efficiently finding the previous node in a list.\n\n**Why Your Answer Was Wrong (and Why the Other Options Are Incorrect)**\n\nYou didn't provide an answer, which is fine, but let's look at why the other options are wrong:\n\n*   **A) It only allows forward traversal.** This is completely false.  A singly linked list *only* allows you to move forward through the list. You can't go back to a previous node.\n*   **C) It is less efficient for data storage.**  Actually, linked lists are often *more* efficient than arrays for inserting and deleting items in the middle of the list.  Arrays can be slow because they require shifting elements.\n*   **D) It only stores numerical data.** This is nonsense! Linked lists can store *any* type of data – strings, objects, anything you want.\n\n\n\n**In simple terms:**\n\nImagine a train. \n\n*   **Singly Linked List:** You can only ride the train forward, one car at a time.\n*   **Doubly Linked List:** You can ride the train forward *and* backward! \n\nDo you have any questions about this explanation, or would you like me to explain it in a different way, perhaps with a simple code example (in Python, for instance)?"
+  }
+]

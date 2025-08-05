@@ -1,0 +1,46 @@
+{
+  "pdfName": "Doubly_Linked_List_Algorithm_ACS_106",
+  "quizName": "Doubly_Linked_List_Algorithm_ACS_106",
+  "answers": [
+    {
+      "questionIndex": 0,
+      "selectedOption": "A",
+      "isCorrect": false,
+      "question": "What is the primary characteristic that distinguishes a doubly linked list from a singly linked list?",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 1,
+      "selectedOption": "D",
+      "isCorrect": false,
+      "question": "Which of the following best describes the role of a node in a doubly linked list?",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 2,
+      "selectedOption": "B",
+      "isCorrect": true,
+      "question": "Insertion and deletion operations in a doubly linked list are generally faster than in a singly linked list due to:",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 3,
+      "selectedOption": "C",
+      "isCorrect": true,
+      "question": "What key capability does the bidirectional linking in a doubly linked list enable?",
+      "correctAnswer": "C"
+    },
+    {
+      "questionIndex": 4,
+      "selectedOption": "C",
+      "isCorrect": false,
+      "question": "Which of the following is a typical application of a doubly linked list?",
+      "correctAnswer": "B"
+    }
+  ],
+  "timestamp": "2025-08-04T07:30:20.320Z",
+  "totalScore": 2,
+  "totalQuestions": 5,
+  "score": 40,
+  "category": "mixed"
+}

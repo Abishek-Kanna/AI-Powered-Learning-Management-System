@@ -1,0 +1,13 @@
+# PDF processing
+PyMuPDF==1.22.3        # For extracting text from PDFs
+pdf2image              # For converting PDF pages to images (used in OCR fallback)
+Pillow                 # Imaging support for pdf2image
+
+# OCR support
+pytesseract            # Python wrapper for Tesseract OCR (Tesseract must be installed separately)
+
+# Ollama LLM API
+ollama                 # Communicates with locally running Ollama server (e.g., gemma, llama3)
+
+# General utilities
+requests               # Optional: If any HTTP calls are made (can remove if unused)

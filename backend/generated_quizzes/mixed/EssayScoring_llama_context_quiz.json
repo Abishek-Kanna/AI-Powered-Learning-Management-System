@@ -1,0 +1,52 @@
+[
+  {
+    "question": "Which of the following best describes the primary purpose of E-Rater, as discussed in the provided resources?",
+    "options": {
+      "A": "To automatically generate original essays based on stylistic patterns.",
+      "B": "To mimic human graders by quantifying various aspects of writing quality using complex algorithms.",
+      "C": "To identify grammatical errors and suggest corrections for student writing.",
+      "D": "To translate student essays into multiple languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The Kappa statistic is most relevant to evaluating:",
+    "options": {
+      "A": "The accuracy of a binary classification model.",
+      "B": "The degree of agreement between different raters assessing written compositions.",
+      "C": "The computational efficiency of a machine learning algorithm.",
+      "D": "The size of an imbalanced dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "According to the resources, why is the ROC curve a particularly useful evaluation metric, especially when dealing with imbalanced datasets?",
+    "options": {
+      "A": "It solely measures the accuracy of classification.",
+      "B": "It provides a robust measure of sensitivity and specificity, regardless of class imbalance.",
+      "C": "It only focuses on identifying the most common writing styles.",
+      "D": "It’s primarily used for evaluating the training time of a model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the concept of ‘model efficiency’ primarily refer to, as highlighted across the references?",
+    "options": {
+      "A": "The number of features used in a machine learning model.",
+      "B": "The computational resources required for training and deploying a model (e.g., memory, training time).",
+      "C": "The complexity of the algorithms used to build the model.",
+      "D": "The size of the training dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which resource emphasizes the importance of achieving effective representation learning despite significant imbalances within the data?",
+    "options": {
+      "A": "Cohen, 1960 (Kappa Statistic)",
+      "B": "Brown & Moore, 2020 (Model Efficiency)",
+      "C": "Conneau et al., 2019 (Imbalanced Data Considerations & Model Selection)",
+      "D": "Chan & Moller, 2010 (E-Rater)"
+    },
+    "answer": "C"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What is the primary characteristic that distinguishes a doubly linked list from a singly linked list?",
+    "options": {
+      "A": "It only allows forward traversal.",
+      "B": "It contains pointers to both the next and previous nodes.",
+      "C": "It is less efficient for data storage.",
+      "D": "It only stores numerical data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes the role of a node in a doubly linked list?",
+    "options": {
+      "A": "It solely stores data values.",
+      "B": "It maintains pointers to the next and previous nodes.",
+      "C": "It only facilitates forward traversal.",
+      "D": "It is a placeholder for data management."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Insertion and deletion operations in a doubly linked list are generally faster than in a singly linked list due to:",
+    "options": {
+      "A": "The increased memory allocation.",
+      "B": "The ability to directly access adjacent nodes.",
+      "C": "The random access capabilities.",
+      "D": "The simplified data structure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What key capability does the bidirectional linking in a doubly linked list enable?",
+    "options": {
+      "A": "Rapid data encryption.",
+      "B": "Efficient sequential access only.",
+      "C": "Traversal in both forward and backward directions.",
+      "D": "Limited memory usage."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a typical application of a doubly linked list?",
+    "options": {
+      "A": "Implementing a simple queue.",
+      "B": "Managing a playlist of music.",
+      "C": "Storing a single integer value.",
+      "D": "Creating a basic stack."
+    },
+    "answer": "B"
+  }
+]

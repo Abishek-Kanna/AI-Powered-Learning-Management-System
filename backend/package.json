@@ -1,0 +1,18 @@
+{
+  "name": "mcq-backend",
+  "version": "1.0.0",
+  "description": "Backend for MCQ generator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon --ignore 'user_answers/**/*' --ignore 'tutor_explanations/**/*' --ignore 'generated_quizzes/**/*' --ignore 'extracted_text/**/*' --ignore 'input_pdfs/**/*' --ignore 'flashcards/**/*' --ignore '*.json' server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

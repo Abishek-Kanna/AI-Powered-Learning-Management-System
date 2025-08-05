@@ -1,0 +1,28 @@
+[
+  {
+    "index": 1,
+    "question": "What is the primary characteristic that distinguishes a doubly linked list from a singly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It only allows forward traversal.",
+      "B": "It contains pointers to both the next and previous nodes.",
+      "C": "It is less efficient for data storage.",
+      "D": "It only stores numerical data."
+    },
+    "explanation": "Okay, let's break down this question and why the answer is B. It’s great that you’re tackling this – understanding linked lists is a really important concept in data structures!\n\n**Here’s the explanation:**\n\nThe core difference between a singly linked list and a doubly linked list comes down to how the nodes are connected. \n\n* **Singly Linked List:** Think of a one-way street. Each node in a singly linked list only has a pointer that points to the *next* node in the sequence. You can only move forward through the list, from one node to the next.\n\n* **Doubly Linked List:** Now imagine that same one-way street, but with a sidewalk going *both* ways!  A doubly linked list has a pointer that points to both the *next* node *and* the *previous* node. This allows you to move forward *and* backward through the list. \n\n**Why Option B is correct:**\n\nOption B – “It contains pointers to both the next and previous nodes” – perfectly describes this key difference. It's the defining characteristic of a doubly linked list.  Having these two pointers enables you to easily go back to a previous node.\n\n**Why the other options are incorrect:**\n\n* **A) It only allows forward traversal:** This is actually the *defining* characteristic of a singly linked list, not a difference from a doubly linked list.\n* **C) It is less efficient for data storage:**  Linked lists are generally as efficient as arrays for storage, depending on the size of the data.  The difference is usually in the speed of access.\n* **D) It only stores numerical data:** This is completely irrelevant to the structure of a linked list. Linked lists can store any type of data – numbers, strings, objects, etc.\n\n\n**Think of it like this:** If you needed to quickly go back to a previous item in a list, you'd need a doubly linked list.  If you only needed to move forward, a singly linked list would be simpler and more efficient. \n\nDo you want to try another question about linked lists, or would you like me to explain any part of this explanation in more detail?"
+  },
+  {
+    "index": 2,
+    "question": "Which of the following best describes the role of a node in a doubly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It solely stores data values.",
+      "B": "It maintains pointers to the next and previous nodes.",
+      "C": "It only facilitates forward traversal.",
+      "D": "It is a placeholder for data management."
+    },
+    "explanation": "Okay, let’s break down this question about doubly linked lists. It’s a really important concept, so don’t worry about not getting it right the first time!\n\n**Here’s the explanation:**\n\nA **doubly linked list** is a type of data structure where each node contains *both* data *and* links to both the next and previous nodes in the list. Think of it like a chain – each link (node) connects to the one before and the one after it. \n\nLet’s look at why option B is correct: **“It maintains pointers to the next and previous nodes.”**\n\n*   **Pointers:** Pointers are like little labels that tell the computer where to find the next piece of information in memory.\n*   **Next & Previous:** In a doubly linked list, each node has a pointer that points to the node *after* it (the ‘next’ pointer) and another pointer that points to the node *before* it (the ‘previous’ pointer).\n\n**Why the other options are wrong:**\n\n*   **A) It solely stores data values.** This is incorrect. While nodes *do* store data, they also have the crucial links that define the list's structure.\n*   **C) It only facilitates forward traversal.**  Forward traversal is possible, but a doubly linked list allows you to move both *forward* and *backward* through the list, which is why it’s ‘doubly’ linked.\n*   **D) It is a placeholder for data management.**  While a node *holds* data, calling it just a 'placeholder' doesn't really capture its function within the list structure.\n\n\n**Simple Analogy:**\n\nImagine you’re writing a story.  Each node is like a paragraph.  Each paragraph (node) contains the text of the paragraph *and* links (pointers) to the previous and next paragraphs in the story.  You can easily move forward to the next paragraph, and you can also move backward to a previous paragraph. \n\n**To help you understand even better, could you tell me:**\n\n*   Can you explain, in your own words, what a pointer is? (Don’t worry about technical jargon – just a simple explanation).\n*   Why do you think it's important for a node to have links to both the next and previous nodes in a list?"
+  }
+]

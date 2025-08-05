@@ -1,0 +1,43 @@
+
+[
+  {
+    "question": "What is a doubly linked list?",
+    "answer": "A linear data structure where each node contains data and pointers to both the next and previous nodes in the sequence, enabling bidirectional traversal."
+  },
+  {
+    "question": "What are the key components of a node in a doubly linked list?",
+    "answer": "Each node contains data, a key, and pointers to the previous and next nodes."
+  },
+  {
+    "question": "Why is a doubly linked list more efficient than a singly linked list?",
+    "answer": "Because it allows for faster insertion and deletion of nodes, particularly in the middle of the list, due to the ability to directly access adjacent nodes."
+  },
+  {
+    "question": "What does bidirectional traversal mean in the context of a doubly linked list?",
+    "answer": "The ability to move both forwards and backwards through the list using the two-way pointers in each node."
+  },
+  {
+    "question": "Name three operations supported by a doubly linked list.",
+    "answer": "Insertion, Deletion, Forward Traversal, Backward Traversal."
+  },
+  {
+    "question": "What is a common application of a doubly linked list?",
+    "answer": "Implementing undo/redo functionality or managing a playlist of music where efficient bidirectional data access is required."
+  },
+  {
+    "question": "What is the fundamental building block of a doubly linked list?",
+    "answer": "The node, which holds data, a key, and pointers to the previous and next nodes."
+  },
+  {
+    "question": "What enables efficient insertion and deletion of nodes in a doubly linked list?",
+    "answer": "The two-way pointers in each node, allowing direct access to adjacent nodes."
+  },
+  {
+    "question": "What is Tutorialspoint?",
+    "answer": "A resource and educational site offering tutorials and learning materials on diverse subjects, including programming and databases."
+  },
+  {
+    "question": "What is a key characteristic of a doubly linked list that distinguishes it from a singly linked list?",
+    "answer": "The ability to traverse the list in both directions (forward and backward) due to the presence of two-way pointers."
+  }
+]
