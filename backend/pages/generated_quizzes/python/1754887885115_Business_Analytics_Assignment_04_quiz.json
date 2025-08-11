@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is the primary purpose of a dashboard?",
+    "options": {
+      "A": "To display raw data in a spreadsheet format.",
+      "B": "To translate complex data into easily understandable visual formats.",
+      "C": "To generate complex statistical reports.",
+      "D": "To automatically execute business processes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes a Key Performance Indicator (KPI)?",
+    "options": {
+      "A": "A comprehensive report detailing all company operations.",
+      "B": "A measurable value indicating how effectively a company achieves its objectives.",
+      "C": "A system for tracking employee attendance.",
+      "D": "A legal document outlining company policies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Why is accurate data collection crucial for dashboard effectiveness?",
+    "options": {
+      "A": "Because inaccurate data always leads to better decisions.",
+      "B": "Because 'garbage in, garbage out' – flawed data produces flawed insights.",
+      "C": "Because it’s more important to have a large volume of data.",
+      "D": "Because it’s easier to correct errors after the dashboard is created."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a key principle of effective dashboard design?",
+    "options": {
+      "A": "Including every possible metric, regardless of relevance.",
+      "B": "Using a cluttered layout with numerous, complex visualizations.",
+      "C": "Prioritizing clarity, simplicity, and relevance.",
+      "D": "Focusing solely on historical data."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'drill-down' capability in a dashboard allow users to do?",
+    "options": {
+      "A": "Automatically generate marketing campaigns.",
+      "B": "View underlying details for a specific trend or data point.",
+      "C": "Delete all irrelevant data from the dashboard.",
+      "D": "Export the dashboard to a different file format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of a suitable visualization for displaying sales trends over time?",
+    "options": {
+      "A": "A pie chart.",
+      "B": "A scatter plot.",
+      "C": "A line chart.",
+      "D": "A geographic map."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a primary benefit of using conditional formatting in a dashboard?",
+    "options": {
+      "A": "It automatically updates the dashboard every hour.",
+      "B": "It creates detailed statistical reports.",
+      "C": "It highlights key data points through visual cues (e.g., color changes).",
+      "D": "It removes all data that is below a certain threshold."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following data sources would be most relevant for creating a sales dashboard?",
+    "options": {
+      "A": "Company employee birthday records.",
+      "B": "CRM (Customer Relationship Management) system data.",
+      "C": "Publicly available weather forecasts.",
+      "D": "International shipping manifests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does an interactive dashboard primarily allow users to do?",
+    "options": {
+      "A": "Simply view pre-defined reports without modification.",
+      "B": "Explore data in detail and gain deeper insights.",
+      "C": "Automatically predict future sales trends.",
+      "D": "Control all aspects of the company's operations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a key element for ensuring data integrity in a dashboard?",
+    "options": {
+      "A": "Using only qualitative data.",
+      "B": "Establishing a regular schedule for data updates.",
+      "C": "Ignoring outdated data.",
+      "D": "Relying solely on automated data collection."
+    },
+    "answer": "B"
+  }
+]

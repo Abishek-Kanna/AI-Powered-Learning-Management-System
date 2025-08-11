@@ -5,6 +5,7 @@ from ollama import Client
 client = Client(host='http://localhost:11434')
 
 def generate_quiz(text, num_questions=10):
+    # This function is correct, no changes needed.
     prompt = f"""
 You are an expert education assistant.
 Generate a quiz with {num_questions} multiple choice questions based on the educational content below.
@@ -25,7 +26,6 @@ Respond ONLY in JSON format as a list of dicts. Each dict should have:
         {"role": "user", "content": prompt}
     ])
     
-    # Clean up markdown formatting if present
     content = response['message']['content'].strip()
     if content.startswith("```json"):
         content = content.replace("```json", "").strip()
@@ -34,13 +34,15 @@ Respond ONLY in JSON format as a list of dicts. Each dict should have:
 
     return content
 
-
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python quiz_generator.py <context_txt_path> [num_questions]")
+    # UPDATED: Now expects 3 arguments
+    if len(sys.argv) < 3:
+        print("Usage: python quiz_generator.py <context_txt_path> <subject> [num_questions]")
         sys.exit(1)
     
     context_path = sys.argv[1]
+    subject = sys.argv[2] # The subject is now an argument
+
     if not os.path.isfile(context_path):
         print(f"File not found: {context_path}")
         sys.exit(1)
@@ -48,23 +50,22 @@ def main():
     with open(context_path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    # Default number of questions
-    num_questions = 5
-    if len(sys.argv) >= 3:
+    num_questions = 10
+    if len(sys.argv) >= 4:
         try:
-            num_questions = int(sys.argv[2])
+            num_questions = int(sys.argv[3])
         except ValueError:
-            print("Invalid num_questions value, using default (5).")
+            print("Invalid num_questions value, using default (10).")
 
-    print(f"Loaded context from {context_path}")
     print(f"Generating {num_questions} quiz questions using Gemma3...")
-
     quiz_json = generate_quiz(text, num_questions=num_questions)
 
-    # Construct output path
-    os.makedirs("generated_quizzes", exist_ok=True)
-    base_name = os.path.splitext(os.path.basename(context_path))[0]
-    output_path = os.path.join("generated_quizzes", f"{base_name}_quiz.json")
+    # UPDATED: Output path now includes the subject subfolder
+    output_dir = os.path.join("generated_quizzes", subject)
+    os.makedirs(output_dir, exist_ok=True)
+    
+    base_name = os.path.splitext(os.path.basename(context_path))[0].replace('_llama_context', '')
+    output_path = os.path.join(output_dir, f"{base_name}_quiz.json")
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(quiz_json)

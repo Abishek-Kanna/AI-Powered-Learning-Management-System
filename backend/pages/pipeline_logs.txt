@@ -1,0 +1,97 @@
+
+
+=== New Pipeline Session 2025-08-11 09:40:15 ===
+[2025-08-11 09:40:15] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754885415416_Business_Analytics_Assignment_04.pdf with Material ID: 68996d27168154aa039cdde3
+[2025-08-11 09:40:15] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754885415416_Business_Analytics_Assignment_04.pdf
+[2025-08-11 09:40:26] [ERROR] Script failed: extract.py
+Error: Traceback (most recent call last):
+  File "C:\Users\prese\Desktop\working\backend\pages\extract.py", line 62, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\prese\Desktop\working\backend\pages\extract.py", line 48, in main
+    labeled = classify_text_blocks_llama(blocks)
+  File "C:\Users\prese\Desktop\working\backend\pages\extract.py", line 30, in classify_text_blocks_llama
+    response = client.chat(model="gemma3", messages=[{"role": "user", "content": prompt}])
+  File "C:\Users\prese\AppData\Local\Programs\Python\Python313\Lib\site-packages\ollama\_client.py", line 342, in chat
+    return self._request(
+           ~~~~~~~~~~~~~^
+      ChatResponse,
+      ^^^^^^^^^^^^^
+    ...<12 lines>...
+      stream=stream,
+      ^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\prese\AppData\Local\Programs\Python\Python313\Lib\site-packages\ollama\_client.py", line 180, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\prese\AppData\Local\Programs\Python\Python313\Lib\site-packages\ollama\_client.py", line 124, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model requires more system memory (2.7 GiB) than is available (2.3 GiB) (status code: 500)
+
+[2025-08-11 09:40:26] [CRITICAL] Pipeline failed: PDF extraction failed
+
+
+=== New Pipeline Session 2025-08-11 09:43:49 ===
+[2025-08-11 09:43:49] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754885629178_Business_Analytics_Assignment_04.pdf with Material ID: 68996dfd1f7b16cf3da19508
+[2025-08-11 09:43:49] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754885629178_Business_Analytics_Assignment_04.pdf
+[2025-08-11 09:45:40] [INFO] Script completed: extract.py
+[2025-08-11 09:45:40] [ERROR] Missing extracted text file: extracted_text/python/1754885629178_Business_Analytics_Assignment_04_labeled.json
+[2025-08-11 09:45:40] [CRITICAL] Pipeline failed: PDF extraction failed
+
+
+=== New Pipeline Session 2025-08-11 09:52:43 ===
+[2025-08-11 09:52:43] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754886163328_Business_Analytics_Assignment_04.pdf with Material ID: 689970131f7b16cf3da1950b
+[2025-08-11 09:52:43] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754886163328_Business_Analytics_Assignment_04.pdf python
+[2025-08-11 09:52:51] [ERROR] Script failed: extract.py
+Error: Traceback (most recent call last):
+  File "C:\Users\prese\Desktop\working\backend\pages\extract.py", line 68, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\prese\Desktop\working\backend\pages\extract.py", line 53, in main
+    labeled = classify_text_blocks_llama(blocks)
+  File "C:\Users\prese\Desktop\working\backend\pages\extract.py", line 32, in classify_text_blocks_llama
+    response = client.chat(model="gemma:2b", messages=[{"role": "user", "content": prompt}])
+  File "C:\Users\prese\AppData\Local\Programs\Python\Python313\Lib\site-packages\ollama\_client.py", line 342, in chat
+    return self._request(
+           ~~~~~~~~~~~~~^
+      ChatResponse,
+      ^^^^^^^^^^^^^
+    ...<12 lines>...
+      stream=stream,
+      ^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\prese\AppData\Local\Programs\Python\Python313\Lib\site-packages\ollama\_client.py", line 180, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\prese\AppData\Local\Programs\Python\Python313\Lib\site-packages\ollama\_client.py", line 124, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model "gemma:2b" not found, try pulling it first (status code: 404)
+
+[2025-08-11 09:52:51] [CRITICAL] Pipeline failed: PDF extraction failed
+
+
+=== New Pipeline Session 2025-08-11 09:54:11 ===
+[2025-08-11 09:54:11] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754886251183_Business_Analytics_Assignment_04.pdf with Material ID: 6899706ba92fa612e141e7b4
+[2025-08-11 09:54:11] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754886251183_Business_Analytics_Assignment_04.pdf python
+[2025-08-11 09:54:38] [INFO] Script completed: extract.py
+[2025-08-11 09:54:38] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\context_generator.py extracted_text/python/1754886251183_Business_Analytics_Assignment_04_labeled.json
+[2025-08-11 09:55:49] [INFO] Script completed: context_generator.py
+[2025-08-11 09:55:49] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\quiz_generator.py extracted_text/python/1754886251183_Business_Analytics_Assignment_04_llama_context.txt 10
+[2025-08-11 09:57:23] [INFO] Script completed: quiz_generator.py
+[2025-08-11 09:57:23] [ERROR] Missing quiz file: generated_quizzes/python/1754886251183_Business_Analytics_Assignment_04_quiz.json
+[2025-08-11 09:57:23] [CRITICAL] Pipeline failed: Quiz generation failed
+
+
+=== New Pipeline Session 2025-08-11 10:21:25 ===
+[2025-08-11 10:21:25] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754887885115_Business_Analytics_Assignment_04.pdf with Material ID: 689976cd537e37064254d717
+[2025-08-11 10:21:25] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754887885115_Business_Analytics_Assignment_04.pdf python
+[2025-08-11 10:21:42] [INFO] Script completed: extract.py
+[2025-08-11 10:21:42] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\context_generator.py extracted_text/python/1754887885115_Business_Analytics_Assignment_04_labeled.json
+[2025-08-11 10:22:46] [INFO] Script completed: context_generator.py
+[2025-08-11 10:22:46] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\quiz_generator.py extracted_text/python/1754887885115_Business_Analytics_Assignment_04_llama_context.txt python 10
+[2025-08-11 10:24:11] [INFO] Script completed: quiz_generator.py
+[2025-08-11 10:24:11] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\flashcard_generator.py extracted_text/python/1754887885115_Business_Analytics_Assignment_04_llama_context.txt 10
+[2025-08-11 10:24:58] [INFO] Script completed: flashcard_generator.py
+[2025-08-11 10:24:58] [INFO] Pipeline completed for C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754887885115_Business_Analytics_Assignment_04.pdf
