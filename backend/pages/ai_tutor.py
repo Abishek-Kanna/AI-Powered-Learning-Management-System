@@ -58,7 +58,7 @@ D) {q['options']['D']}
 Student's Answer: {q['user_answer']}) {user_answer_text}
 Correct Answer: {q['correct_answer']}) {correct_answer_text}
 
-Provide a clear explanation for why the correct answer is right and the student's answer is wrong."""
+Provide a clear explanation for why the correct answer is right and the student's answer is wrong. Do not use Markdown, asterisks, or any other formatting characters. Your entire response must be in plain text."""
         
         try:
             response = client.chat(model="gemma3", messages=[{"role": "user", "content": prompt}])
@@ -90,7 +90,6 @@ def main():
 
     explanations = explain_wrong_answers(quiz_data, user_answers)
 
-    # UPDATED: Derive base_name from the material record to ensure consistency
     base_name = os.path.splitext(material.get("filename", "unknown_file"))[0]
     output_dir = "tutor_explanations"
     os.makedirs(output_dir, exist_ok=True)

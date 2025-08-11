@@ -45,8 +45,8 @@
     },
     {
       "questionIndex": 6,
-      "selectedOption": "B",
-      "isCorrect": true,
+      "selectedOption": "C",
+      "isCorrect": false,
       "question": "Which visualization tool is most suitable for displaying sales performance over time?",
       "correctAnswer": "B"
     },
@@ -59,7 +59,7 @@
     },
     {
       "questionIndex": 8,
-      "selectedOption": "C",
+      "selectedOption": "D",
       "isCorrect": false,
       "question": "What is the purpose of visual indicators like 'traffic lights' on a sales dashboard?",
       "correctAnswer": "B"

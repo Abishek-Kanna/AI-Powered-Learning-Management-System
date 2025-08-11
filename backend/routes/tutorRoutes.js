@@ -7,7 +7,10 @@ const { PYTHON_PATH } = require('../config');
 const Material = require('../models/Material');
 
 const USER_ANSWERS_DIR = path.join(__dirname, '../user_answers');
-const TUTOR_EXPLANATIONS_DIR = path.join(__dirname, '../pages/tutor_explanations');
+
+// --- CORRECTED LINE ---
+// The path now correctly points to the 'tutor_explanations' directory at the project root.
+const TUTOR_EXPLANATIONS_DIR = path.join(__dirname, '../tutor_explanations');
 
 router.post('/trigger', async (req, res) => {
   const { quizName, userAnswers, subject } = req.body;
@@ -41,7 +44,6 @@ router.post('/trigger', async (req, res) => {
   }
 });
 
-// --- FINAL UPDATED LOGIC ---
 router.get('/explanations/:quizName', async (req, res) => {
     const { quizName } = req.params;
     try {
@@ -53,16 +55,13 @@ router.get('/explanations/:quizName', async (req, res) => {
         const baseName = path.parse(material.filename).name;
         const explanationFilePath = path.join(TUTOR_EXPLANATIONS_DIR, `${baseName}_tutor_explanations.json`);
 
-        // Directly try to read the file. If it fails, the catch block will handle it.
         const data = await fs.readFile(explanationFilePath, 'utf-8');
         res.status(200).json(JSON.parse(data));
 
     } catch (error) {
         if (error.code === 'ENOENT') {
-            // This error code means "File Not Found", which is expected while polling.
             res.status(404).json({ error: 'Explanations not found yet. Please wait.' });
         } else {
-            // For any other unexpected errors.
             console.error('Error fetching explanations:', error);
             res.status(500).json({ error: 'Failed to fetch explanations.' });
         }
