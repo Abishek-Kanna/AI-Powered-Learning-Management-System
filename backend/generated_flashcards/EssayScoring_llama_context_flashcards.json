@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is an ROC curve and what does the AUC represent?",
+    "answer": "The ROC curve graphically represents a binary classification model's performance across different thresholds. The Area Under the Curve (AUC) quantifies overall performance by measuring the entire area under the curve, indicating how well the model can distinguish between positive and negative cases – higher AUC (closer to 1) is better."
+  },
+  {
+    "question": "What is Cohen’s Kappa and why is it useful?",
+    "answer": "Cohen’s Kappa is a statistic used to assess agreement between two raters (or a rater and a machine) on a categorical scale, accounting for chance agreement. It ranges from -1 to +1, with +1 indicating perfect agreement and 0 representing agreement no better than chance."
+  },
+  {
+    "question": "What is Automated Essay Scoring (AES)?",
+    "answer": "AES systems are designed to automatically grade essays, typically based on predefined criteria and algorithms, using techniques like Natural Language Processing (NLP) and machine learning."
+  },
+  {
+    "question": "Name three key textual features commonly used in AES systems.",
+    "answer": "Key features include lexical diversity metrics (e.g., Type-Token Ratio, Hapax Legomena), sentence length, and vocabulary richness."
+  },
+  {
+    "question": "What is the role of Scikit-learn in the development of AES systems?",
+    "answer": "Scikit-learn is a popular Python library used to build and train machine learning models for AES systems, including model selection and hyperparameter tuning."
+  },
+  {
+    "question": "Why is inter-rater reliability important when validating AES systems?",
+    "answer": "High inter-rater reliability demonstrates that the system’s scores are consistent and justifiable, indicating that the system is mimicking human judgment accurately."
+  },
+  {
+    "question": "Describe the evolution of AES systems.",
+    "answer": "Early AES systems were largely rule-based, relying on handcrafted rules. Modern systems increasingly use machine learning to adapt to the nuances of writing and improve accuracy."
+  },
+  {
+    "question": "What is the significance of the Type-Token Ratio (TTR) in the context of AES?",
+    "answer": "The Type-Token Ratio (TTR) is a lexical diversity metric that measures the proportion of unique words (types) in a text relative to the total number of words (tokens). A higher TTR generally indicates a more diverse and sophisticated vocabulary."
+  },
+  {
+    "question": "What does NLP contribute to the functionality of AES?",
+    "answer": "NLP (Natural Language Processing) components, such as tokenization, stemming/lemmatization, and part-of-speech tagging, provide the AES system with the necessary information to understand the essay's content and structure."
+  },
+  {
+    "question": "What is the purpose of model training in the context of AES?",
+    "answer": "Model training involves feeding the system a large dataset of essays with known human scores and allowing the algorithm to learn the relationships between the textual features and the scores, thereby creating a predictive model."
+}
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "index": 2,
+    "question": "Which of the following best describes the role of a node in a doubly linked list?",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "It solely stores data values.",
+      "B": "It maintains pointers to the next and previous nodes.",
+      "C": "It only facilitates forward traversal.",
+      "D": "It is a placeholder for data management."
+    },
+    "explanation": "Okay, let’s break down this question about doubly linked lists. It’s a really important concept in data structures, so let’s make sure you understand it fully.\n\n**The Correct Answer & Why It's Right:**\n\nThe correct answer is **B) It maintains pointers to the next and previous nodes.**\n\nLet's think about what a doubly linked list *is*.  It’s a type of list where each node isn't just connected to the *next* node. Instead, *every* node has two pointers:\n\n*   **`next` pointer:** This pointer points to the node that comes *after* it in the list. Just like in a regular, singly linked list.\n*   **`previous` pointer:** This pointer points to the node that comes *before* it in the list.\n\nThis “double” connection is what makes it a *doubly* linked list.  It allows you to move in *both* directions – forward and backward – through the list.  Without these pointers, you wouldn't be able to navigate the list in either direction.\n\n**Why Your Answer (Not Providing an Answer) Was Wrong:**\n\nSimply not answering the question left you without the crucial understanding of a node's role.  Choosing a wrong answer without knowing the correct one isn't helpful.\n\n**Let's Think About Why the Other Options Are Incorrect:**\n\n*   **A) It solely stores data values.** While nodes *do* store data, that’s not their *primary* role.  They also have pointers.\n*   **C) It only facilitates forward traversal.** A doubly linked list allows you to move both forwards *and* backwards, not just one way.\n*   **D) It is a placeholder for data management.** This is too vague.  It's not just a placeholder; it's a structured element with specific connections.\n\n\n**Simple Analogy:**\n\nImagine a chain.  Each link in the chain isn’t just holding the weight – it's also connected to the link *before* and *after* it.  A node in a doubly linked list is like a link in that chain - it has connections in both directions.\n\n---\n\nDo you want to try another similar question to test your understanding, or would you like me to explain any part of this more in detail? Would you like to see an example of how these pointers are used in a simple scenario?"
+  },
+  {
+    "index": 3,
+    "question": "Insertion and deletion operations in a doubly linked list are generally faster than in a singly linked list due to:",
+    "user_answer": "",
+    "correct_answer": "B",
+    "options": {
+      "A": "The increased memory allocation.",
+      "B": "The ability to directly access adjacent nodes.",
+      "C": "The random access capabilities.",
+      "D": "The simplified data structure."
+    },
+    "explanation": "Okay, let's break down this question and why the correct answer is B, and why not the others.\n\n**The Question Explained:**\n\nThe question is asking why insertion and deletion operations are faster in a *doubly* linked list compared to a *singly* linked list.  Think of a linked list as a chain of connected boxes, where each box holds data and a link to the next box.\n\n**Why B is Correct: “The ability to directly access adjacent nodes.”**\n\nLet's imagine you want to insert a new box into a chain. \n\n*   **Singly Linked List:**  If you want to insert *before* a specific box, you have to start at the beginning of the chain and *walk* through all the boxes until you get to the right spot.  You have to follow the link from one box to the next, one step at a time.  If you want to delete a box, you also have to find it by walking through the chain.\n\n*   **Doubly Linked List:** With a doubly linked list, each box *also* has a link that goes back to the *previous* box. This means you can go *both* forward and backward.  So, if you’re inserting or deleting a box, you can simply go to the adjacent box and then jump into the new position (or remove the existing box).  You don't have to backtrack and re-scan the list. This makes insertion and deletion much faster because it cuts out the need for searching.\n\n\n**Why the Other Options are Incorrect:**\n\n*   **A) The increased memory allocation:** Doubly linked lists actually use *more* memory per node because they store two pointers (one forward, one backward) instead of one.\n*   **C) The random access capabilities:** Linked lists, including doubly linked lists, *don’t* have random access like arrays. You can’t jump directly to an element based on its position (like you can with an array using an index). You have to traverse the list sequentially.\n*   **D) The simplified data structure:** Doubly linked lists are actually *more* complex than singly linked lists because of the extra pointer they require.\n\n**In simple terms:**  A doubly linked list is like having a two-way street for your data, while a singly linked list is like a one-way street.  That extra connection makes a big difference in speed when adding or removing items.\n\n---\n\nDo you want to try another question about linked lists, or would you like me to explain this concept in a different way (e.g., with a diagram)?"
+  }
+]

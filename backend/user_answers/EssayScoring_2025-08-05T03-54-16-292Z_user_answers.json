@@ -1,0 +1,46 @@
+{
+  "pdfName": "EssayScoring",
+  "quizName": "EssayScoring",
+  "answers": [
+    {
+      "questionIndex": 0,
+      "selectedOption": "A",
+      "isCorrect": false,
+      "question": "Which of the following best describes the primary purpose of E-Rater, as discussed in the provided resources?",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 1,
+      "selectedOption": "C",
+      "isCorrect": false,
+      "question": "The Kappa statistic is most relevant to evaluating:",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 2,
+      "selectedOption": "A",
+      "isCorrect": false,
+      "question": "According to the resources, why is the ROC curve a particularly useful evaluation metric, especially when dealing with imbalanced datasets?",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 3,
+      "selectedOption": "B",
+      "isCorrect": true,
+      "question": "What does the concept of ‘model efficiency’ primarily refer to, as highlighted across the references?",
+      "correctAnswer": "B"
+    },
+    {
+      "questionIndex": 4,
+      "selectedOption": "C",
+      "isCorrect": true,
+      "question": "Which resource emphasizes the importance of achieving effective representation learning despite significant imbalances within the data?",
+      "correctAnswer": "C"
+    }
+  ],
+  "timestamp": "2025-08-05T03:54:16.292Z",
+  "totalScore": 2,
+  "totalQuestions": 5,
+  "score": 40,
+  "category": "mixed"
+}

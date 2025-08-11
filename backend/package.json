@@ -8,8 +8,16 @@
     "dev": "nodemon --ignore 'user_answers/**/*' --ignore 'tutor_explanations/**/*' --ignore 'generated_quizzes/**/*' --ignore 'extracted_text/**/*' --ignore 'input_pdfs/**/*' --ignore 'flashcards/**/*' --ignore '*.json' server.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^4.21.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.0",
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
