@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 from ollama import Client
 
 client = Client(host='http://localhost:11434')
@@ -24,43 +25,54 @@ Respond ONLY in JSON format as a list of dicts. Each dict should have:
         {"role": "user", "content": prompt}
     ])
 
-    content = response['message']['content'].strip()
-    if content.startswith("```json"):
-        content = content.replace("```json", "").strip()
-    if content.endswith("```"):
-        content = content[:-3].strip()
+    # --- START: New robust JSON cleaning logic ---
+    content = response['message']['content']
+    
+    json_start = content.find('[')
+    json_end = content.rfind(']') + 1
 
-    return content
+    if json_start != -1 and json_end != -1:
+        json_str = content[json_start:json_end]
+        try:
+            json.loads(json_str)
+            return json_str
+        except json.JSONDecodeError:
+            print("ERROR: Failed to decode JSON from the model's response.", file=sys.stderr)
+            return None
+    else:
+        print("ERROR: No valid JSON list found in the model's response.", file=sys.stderr)
+        return None
+    # --- END: New robust JSON cleaning logic ---
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python flashcard_generator.py <context_txt_path> [num_flashcards]")
+        print("Usage: python flashcard_generator.py <context_txt_path> [num_flashcards]", file=sys.stderr)
         sys.exit(1)
     
     context_path = sys.argv[1]
     if not os.path.isfile(context_path):
-        print(f"File not found: {context_path}")
+        print(f"File not found: {context_path}", file=sys.stderr)
         sys.exit(1)
 
     with open(context_path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    # Default number of flashcards
     num_flashcards = 10
     if len(sys.argv) >= 3:
         try:
             num_flashcards = int(sys.argv[2])
         except ValueError:
-            print("Invalid num_flashcards value, using default (10).")
+            pass
 
-    print(f"Loaded context from {context_path}")
     print(f"Generating {num_flashcards} flashcards using Gemma3...")
-
     flashcard_json = generate_flashcards(text, num_flashcards=num_flashcards)
 
-    # Construct output path
+    if flashcard_json is None:
+        sys.exit(1)
+
+    # You may need to update this to accept a subject, similar to the quiz generator
     os.makedirs("generated_flashcards", exist_ok=True)
-    base_name = os.path.splitext(os.path.basename(context_path))[0]
+    base_name = os.path.splitext(os.path.basename(context_path))[0].replace('_llama_context', '')
     output_path = os.path.join("generated_flashcards", f"{base_name}_flashcards.json")
 
     with open(output_path, "w", encoding="utf-8") as f:

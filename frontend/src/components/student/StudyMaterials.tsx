@@ -1,10 +1,8 @@
-// src/components/student/StudyMaterials.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 import { useNavigate } from 'react-router-dom';
 
-// Define the structure for our study material cards
 interface StudyMaterialCard {
   title: string;
   description: string;
@@ -26,7 +24,6 @@ const StudyMaterials = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Define the study material cards data
   const studyMaterialCards: StudyMaterialCard[] = [
     {
       title: 'Python',
@@ -65,12 +62,11 @@ const StudyMaterials = () => {
     }
   ];
 
-  // Function to fetch PDFs for a specific category
   const fetchPDFs = async (folder: string) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:3001/api/study-materials/${folder}`);
+      const response = await fetch(`http://localhost:3001/api/student/materials/${folder}`);
       if (!response.ok) {
         throw new Error('Failed to fetch study materials');
       }
@@ -84,15 +80,15 @@ const StudyMaterials = () => {
     }
   };
 
-  // Function to handle viewing materials for a category
   const handleViewMaterials = (card: StudyMaterialCard) => {
     setSelectedCategory(card.title);
     fetchPDFs(card.folder);
   };
 
-  // Function to handle PDF download/view
   const handlePDFAction = (pdf: PDFFile, action: 'view' | 'download') => {
-    const url = `http://localhost:3001/api/study-materials/file/${encodeURIComponent(pdf.path)}?action=${action}`;
+    const subject = studyMaterialCards.find(c => c.title === selectedCategory)?.folder;
+    const url = `http://localhost:3001/api/student/materials/file/${subject}/${encodeURIComponent(pdf.path)}`;
+    
     if (action === 'view') {
       window.open(url, '_blank');
     } else {
@@ -105,7 +101,6 @@ const StudyMaterials = () => {
     }
   };
 
-  // Function to handle back navigation
   const handleBack = () => {
     if (selectedCategory) {
       setSelectedCategory(null);
@@ -117,7 +112,6 @@ const StudyMaterials = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Back Button - Top Left */}
       <div className="absolute top-4 left-4 z-10">
         <Button
           variant="outline"
@@ -130,16 +124,12 @@ const StudyMaterials = () => {
         </Button>
       </div>
 
-      {/* Main Content - Centered */}
       <div className="min-h-screen flex justify-center items-center">
         <div className="container mx-auto px-4">
           {!selectedCategory ? (
-            // Category Selection View
             <div className="text-center">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Study Materials</h1>
               <p className="text-gray-600 mb-8">Browse your uploaded study materials by category</p>
-
-              {/* Study Material Cards Grid - Centered */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {studyMaterialCards.map((card, index) => (
                   <Card 
@@ -154,6 +144,7 @@ const StudyMaterials = () => {
                       <div className="p-6">
                         <h2 className="text-xl font-semibold text-gray-800 mb-2">{card.title}</h2>
                         <p className="text-gray-600 text-sm mb-4">{card.description}</p>
+
                         <Button 
                           variant="outline" 
                           className="w-full"
@@ -167,7 +158,6 @@ const StudyMaterials = () => {
               </div>
             </div>
           ) : (
-            // PDF List View
             <div className="text-center max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                 {selectedCategory} Study Materials

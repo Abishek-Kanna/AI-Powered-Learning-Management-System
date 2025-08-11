@@ -95,3 +95,16 @@ ollama._types.ResponseError: model "gemma:2b" not found, try pulling it first (s
 [2025-08-11 10:24:11] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\flashcard_generator.py extracted_text/python/1754887885115_Business_Analytics_Assignment_04_llama_context.txt 10
 [2025-08-11 10:24:58] [INFO] Script completed: flashcard_generator.py
 [2025-08-11 10:24:58] [INFO] Pipeline completed for C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754887885115_Business_Analytics_Assignment_04.pdf
+
+
+=== New Pipeline Session 2025-08-11 11:03:36 ===
+[2025-08-11 11:03:36] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754890416362_Business_Analytics_Assignment_04.pdf with Material ID: 689980b07725870f05a2165d
+[2025-08-11 11:03:36] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754890416362_Business_Analytics_Assignment_04.pdf python
+[2025-08-11 11:03:54] [INFO] Script completed: extract.py
+[2025-08-11 11:03:54] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\context_generator.py extracted_text/python/1754890416362_Business_Analytics_Assignment_04_labeled.json
+[2025-08-11 11:05:00] [INFO] Script completed: context_generator.py
+[2025-08-11 11:05:00] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\quiz_generator.py extracted_text/python/1754890416362_Business_Analytics_Assignment_04_llama_context.txt python 10
+[2025-08-11 11:06:33] [INFO] Script completed: quiz_generator.py
+[2025-08-11 11:06:33] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\flashcard_generator.py extracted_text/python/1754890416362_Business_Analytics_Assignment_04_llama_context.txt 10
+[2025-08-11 11:07:22] [INFO] Script completed: flashcard_generator.py
+[2025-08-11 11:07:22] [INFO] Pipeline completed for C:\Users\prese\Desktop\working\backend\input_pdfs\python\1754890416362_Business_Analytics_Assignment_04.pdf

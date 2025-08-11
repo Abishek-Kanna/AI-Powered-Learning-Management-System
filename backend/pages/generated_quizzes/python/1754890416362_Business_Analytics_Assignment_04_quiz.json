@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is the primary purpose of a dashboard?",
+    "options": {
+      "A": "To display every single sales number, regardless of relevance.",
+      "B": "To provide a visual representation of key data points for quick understanding and decision-making.",
+      "C": "To create complex spreadsheets for detailed data analysis.",
+      "D": "To simply store raw data without any formatting or interpretation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes Key Performance Indicators (KPIs)?",
+    "options": {
+      "A": "Randomly selected data points with no specific purpose.",
+      "B": "Specific, measurable values that demonstrate how effectively a company is achieving its objectives.",
+      "C": "Irrelevant numbers used for decorative purposes.",
+      "D": "Unstructured data that requires extensive manual analysis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Why is data preparation essential for creating an effective dashboard?",
+    "options": {
+      "A": "Because raw data is always accurate and ready for immediate use.",
+      "B": "To ensure the accuracy and consistency of the data being displayed.",
+      "C": "To complicate the data analysis process and make it more challenging.",
+      "D": "To randomly generate data for testing purposes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a key principle of dashboard design?",
+    "options": {
+      "A": "To include as much information as possible to provide a complete picture.",
+      "B": "To prioritize clarity, simplicity, and relevance in the presentation of data.",
+      "C": "To use complex, highly detailed charts for maximum visual impact.",
+      "D": "To always follow a rigid, pre-defined layout regardless of data needs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of chart is best suited for showing sales performance over time?",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Bar Chart",
+      "C": "Line Chart",
+      "D": "Scatter Plot"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'information overload' refer to in the context of dashboard design?",
+    "options": {
+      "A": "The process of gathering data from multiple sources.",
+      "B": "Presenting too much irrelevant information, making it difficult to identify key insights.",
+      "C": "Using advanced statistical analysis techniques.",
+      "D": "The act of displaying data in a visually appealing manner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 'drill-down' capability in a dashboard allows users to:",
+    "options": {
+      "A": "Generate random numbers for analysis.",
+      "B": "View more detailed information when clicking on a specific data point.",
+      "C": "Automatically update the dashboard with the latest data.",
+      "D": "Delete unnecessary data from the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a key benefit of using conditional formatting on a dashboard?",
+    "options": {
+      "A": "To hide sensitive data from unauthorized users.",
+      "B": "To automatically calculate all the data.",
+      "C": "To quickly highlight areas needing attention using visual cues.",
+      "D": "To create complex mathematical formulas."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is an example of a filter feature in a dashboard?",
+    "options": {
+      "A": "Automatically sorting the data alphabetically.",
+      "B": "Allowing users to view sales data for a specific region or time period.",
+      "C": "Changing the color scheme of the dashboard.",
+      "D": "Generating reports in different file formats."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of data collection & preparation in the context of creating a dashboard?",
+    "options": {
+      "A": "To create a visually confusing presentation of data.",
+      "B": "To ensure the data is accurate, consistent, and organized for meaningful analysis.",
+      "C": "To randomly generate data to test the dashboard's functionality.",
+      "D": "To avoid collecting any data to keep the dashboard simple."
+    },
+    "answer": "B"
+  }
+]

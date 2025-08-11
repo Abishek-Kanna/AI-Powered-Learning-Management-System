@@ -1,11 +1,11 @@
 import sys
 import os
+import json
 from ollama import Client
 
 client = Client(host='http://localhost:11434')
 
 def generate_quiz(text, num_questions=10):
-    # This function is correct, no changes needed.
     prompt = f"""
 You are an expert education assistant.
 Generate a quiz with {num_questions} multiple choice questions based on the educational content below.
@@ -26,25 +26,38 @@ Respond ONLY in JSON format as a list of dicts. Each dict should have:
         {"role": "user", "content": prompt}
     ])
     
-    content = response['message']['content'].strip()
-    if content.startswith("```json"):
-        content = content.replace("```json", "").strip()
-    if content.endswith("```"):
-        content = content[:-3].strip()
+    # --- START: New robust JSON cleaning logic ---
+    content = response['message']['content']
+    
+    # Find the start and end of the JSON list
+    json_start = content.find('[')
+    json_end = content.rfind(']') + 1
 
-    return content
+    if json_start != -1 and json_end != -1:
+        json_str = content[json_start:json_end]
+        try:
+            # Validate that the extracted string is valid JSON
+            json.loads(json_str)
+            return json_str
+        except json.JSONDecodeError:
+            print("ERROR: Failed to decode JSON from the model's response.", file=sys.stderr)
+            return None
+    else:
+        print("ERROR: No valid JSON list found in the model's response.", file=sys.stderr)
+        return None
+    # --- END: New robust JSON cleaning logic ---
+
 
 def main():
-    # UPDATED: Now expects 3 arguments
     if len(sys.argv) < 3:
-        print("Usage: python quiz_generator.py <context_txt_path> <subject> [num_questions]")
+        print("Usage: python quiz_generator.py <context_txt_path> <subject> [num_questions]", file=sys.stderr)
         sys.exit(1)
     
     context_path = sys.argv[1]
-    subject = sys.argv[2] # The subject is now an argument
+    subject = sys.argv[2]
 
     if not os.path.isfile(context_path):
-        print(f"File not found: {context_path}")
+        print(f"File not found: {context_path}", file=sys.stderr)
         sys.exit(1)
 
     with open(context_path, "r", encoding="utf-8") as f:
@@ -55,12 +68,15 @@ def main():
         try:
             num_questions = int(sys.argv[3])
         except ValueError:
-            print("Invalid num_questions value, using default (10).")
+            pass
 
     print(f"Generating {num_questions} quiz questions using Gemma3...")
     quiz_json = generate_quiz(text, num_questions=num_questions)
 
-    # UPDATED: Output path now includes the subject subfolder
+    # If quiz generation failed, exit gracefully
+    if quiz_json is None:
+        sys.exit(1)
+
     output_dir = os.path.join("generated_quizzes", subject)
     os.makedirs(output_dir, exist_ok=True)
     

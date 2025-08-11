@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is a dashboard primarily designed to do?",
+    "answer": "A dashboard is a visual representation of key data points, designed for quick understanding and decision-making."
+  },
+  {
+    "question": "What are Key Performance Indicators (KPIs)?",
+    "answer": "KPIs are specific, measurable values that demonstrate how effectively a company or sales team is achieving its objectives."
+  },
+  {
+    "question": "Why is data preparation important for a dashboard?",
+    "answer": "Accurate and well-organized data is essential. Data preparation involves cleaning, formatting, and aggregation to ensure reliable insights."
+  },
+  {
+    "question": "What are some key design principles for a dashboard?",
+    "answer": "Dashboard design emphasizes clarity, simplicity, and relevance, utilizing charts and avoiding information overload."
+  },
+  {
+    "question": "What does 'information overload' refer to in dashboard design?",
+    "answer": "It describes presenting too much data, making it difficult for users to quickly identify key insights."
+  },
+  {
+    "question": "What is a filter used for in an interactive dashboard?",
+    "answer": "Filters allow users to narrow down the data displayed, focusing on specific regions, time periods, or categories."
+  },
+  {
+    "question": "What is 'drill-down' capability?",
+    "answer": "Drill-down allows users to explore data in greater detail by clicking on a specific data point for more granular information."
+  },
+  {
+    "question": "What is conditional formatting used for?",
+    "answer": "It uses visual cues, such as color-coded traffic lights, to highlight areas that require attention or are performing well."
+  },
+  {
+    "question": "How does a dashboard relate to data visualization?",
+    "answer": "A dashboard is fundamentally about transforming numbers into pictures (charts and graphs) to make data easier to understand."
+  },
+  {
+    "question": "Why is it important to clean data before creating a dashboard?",
+    "answer": "Cleaning data involves handling missing values and errors to ensure the accuracy and reliability of the insights presented."
+  }
+]
