@@ -14,14 +14,14 @@ class PipelineRunner:
         self.init_logging()
 
     def init_logging(self):
-        with open(self.log_file, "a") as f:
+        with open(self.log_file, "a", encoding="utf-8") as f:
             f.write(f"\n\n=== New Pipeline Session {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ===\n")
 
     def log(self, message, status="INFO"):
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         log_entry = f"[{timestamp}] [{status}] {message}"
         print(log_entry, flush=True)
-        with open(self.log_file, "a") as f:
+        with open(self.log_file, "a", encoding="utf-8") as f:
             f.write(log_entry + "\n")
 
     def ensure_directories(self):
@@ -41,7 +41,7 @@ class PipelineRunner:
         command = ["python", script_path] + args
         self.log(f"Executing: {' '.join(command)}")
         try:
-            result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
+            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=timeout)
             if result.returncode != 0:
                 self.log(f"Script failed: {script_name}\nError: {result.stderr}", "ERROR")
                 return False
@@ -76,10 +76,10 @@ class PipelineRunner:
             subject = os.path.basename(os.path.dirname(input_pdf))
 
             artifacts = {
-                "extracted_json": f"extracted_text/{subject}/{safe_name}_labeled.json",
-                "context_txt": f"extracted_text/{subject}/{safe_name}_llama_context.txt",
-                "quiz_json": f"generated_quizzes/{subject}/{safe_name}_quiz.json",
-                "flashcards_json": f"generated_flashcards/{subject}/{safe_name}_flashcards.json"
+                "extracted_json": os.path.join(self.backend_dir, f"extracted_text/{subject}/{safe_name}_labeled.json"),
+                "context_txt": os.path.join(self.backend_dir, f"extracted_text/{subject}/{safe_name}_llama_context.txt"),
+                "quiz_json": os.path.join(self.backend_dir, f"generated_quizzes/{subject}/{safe_name}_quiz.json"),
+                "flashcards_json": os.path.join(self.backend_dir, f"generated_flashcards/{subject}/{safe_name}_flashcards.json")
             }
             for path in artifacts.values():
                 os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -95,12 +95,32 @@ class PipelineRunner:
                 
             self.run_script("flashcard_generator.py", [artifacts["context_txt"], "10"])
 
-            update_data = {"status": "completed", "completed_at": datetime.now()}
-            with open(artifacts["quiz_json"], "r") as f:
-                update_data["quiz_content"] = json.load(f)
-            
-            db.materials.update_one({"_id": ObjectId(material_id)}, {"$set": update_data})
-            
+            self.log("Attempting to finalize material record in database...")
+            try:
+                update_data = {
+                    "status": "completed",
+                    "completed_at": datetime.now()
+                }
+                with open(artifacts["quiz_json"], "r", encoding="utf-8") as f:
+                    update_data["quiz_content"] = json.load(f)
+                
+                query_filter = {"_id": ObjectId(material_id)}
+                print(f"Executing DB update with filter: {query_filter}")
+
+                result = db.materials.update_one(
+                    query_filter,
+                    {"$set": update_data}
+                )
+
+                if result.modified_count == 0:
+                    raise Exception("Material document was not found or not modified in the database.")
+
+                self.log(f"Database update successful. Matched: {result.matched_count}, Modified: {result.modified_count}")
+
+            except Exception as e:
+                self.log(f"DATABASE UPDATE FAILED: {str(e)}", "CRITICAL")
+                raise ValueError(f"Database update failed: {str(e)}")
+
             self.log(f"Pipeline completed for {input_pdf}")
             return {"status": "success", "material_id": str(material_id)}
 

@@ -127,8 +127,9 @@ const QuizInterface: React.FC = () => {
   };
 
   const triggerAiTutor = async () => {
-    if (!currentQuiz) {
-      setTutorError('No quiz selected');
+    const currentCategoryFolder = categories.find(c => c.title === selectedCategory)?.folder;
+    if (!currentQuiz || !currentCategoryFolder) {
+      setTutorError('No quiz or category selected');
       return;
     }
 
@@ -137,41 +138,42 @@ const QuizInterface: React.FC = () => {
     setTutorExplanations([]);
 
     try {
-      const triggerResponse = await fetch('http://localhost:3001/api/trigger-ai-tutor', {
+      await fetch('http://localhost:3001/api/tutor/trigger', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          pdfName: currentQuiz
+          quizName: currentQuiz,
+          userAnswers: userAnswers,
+          subject: currentCategoryFolder
         }),
       });
 
-      if (!triggerResponse.ok) {
-        const errorData = await triggerResponse.json();
-        throw new Error(errorData.error || 'Failed to trigger AI tutor');
-      }
+      // --- START: New Polling Logic ---
+      const pollInterval = 5000; // Check every 5 seconds
+      const pollTimeout = 180000; // Stop trying after 3 minutes
 
-      const triggerResult = await triggerResponse.json();
-
-      setTimeout(async () => {
+      const pollId = setInterval(async () => {
         try {
-          const explanationsResponse = await fetch(`http://localhost:3001/api/tutor-explanations/${encodeURIComponent(currentQuiz)}`);
-          
-          if (explanationsResponse.ok) {
-            const explanations = await explanationsResponse.json();
+          const res = await fetch(`http://localhost:3001/api/tutor/explanations/${encodeURIComponent(currentQuiz)}`);
+          if (res.ok) {
+            const explanations = await res.json();
             setTutorExplanations(explanations);
             setShowTutorExplanations(true);
-          } else {
-            const errorData = await explanationsResponse.json();
-            setTutorError(errorData.error || 'Failed to load explanations');
+            setTutorLoading(false);
+            clearInterval(pollId); // Stop polling on success
+            clearTimeout(timeoutId);
           }
-        } catch (fetchError) {
-          setTutorError('Failed to fetch AI explanations');
-        } finally {
-          setTutorLoading(false);
+        } catch (pollError) {
+          // Continue polling
         }
-      }, 3000);
+      }, pollInterval);
+
+      const timeoutId = setTimeout(() => {
+        clearInterval(pollId); // Stop polling on timeout
+        setTutorError('The AI tutor timed out. Please try again.');
+        setTutorLoading(false);
+      }, pollTimeout);
+      // --- END: New Polling Logic ---
 
     } catch (error) {
       setTutorError(error instanceof Error ? error.message : 'Failed to trigger AI tutor');
@@ -190,26 +192,29 @@ const QuizInterface: React.FC = () => {
     fetchQuizList(cat.folder);
   };
 
+  const returnToQuizList = async () => {
+    if (currentQuiz && selectedCategory) {
+      await endSession({
+        sessionType: 'quiz',
+        activity: currentQuiz,
+        category: categories.find(c => c.title === selectedCategory)?.folder || 'mixed'
+      });
+    }
+    setQuestions([]);
+    setCurrentQuiz(null);
+    setCurrentQuestion(0);
+    setUserAnswers([]);
+    setSelectedOption(null);
+    setShowResults(false);
+    setShowTutorExplanations(false);
+    setTutorExplanations([]);
+  };
+
   const backButton = async () => {
     if (showTutorExplanations) {
       setShowTutorExplanations(false);
     } else if (showResults || questions.length) {
-      if (currentQuiz && selectedCategory) {
-        await endSession({
-          sessionType: 'quiz',
-          activity: currentQuiz,
-          category: categories.find(c => c.title === selectedCategory)?.folder || 'mixed'
-        });
-      }
-      
-      setQuestions([]);
-      setCurrentQuiz(null);
-      setCurrentQuestion(0);
-      setUserAnswers([]);
-      setSelectedOption(null);
-      setShowResults(false);
-      setShowTutorExplanations(false);
-      setTutorExplanations([]);
+      await returnToQuizList();
     } else if (selectedCategory) {
       setSelectedCategory(null);
       setAvailableQuizzes([]);
@@ -261,7 +266,6 @@ const QuizInterface: React.FC = () => {
         score: percentage
       });
     }
-    
     setShowResults(true);
   };
 
@@ -322,25 +326,6 @@ const QuizInterface: React.FC = () => {
     }
   };
 
-  const completeQuiz = async () => {
-    if (currentQuiz && selectedCategory) {
-      await endSession({
-        sessionType: 'quiz',
-        activity: currentQuiz,
-        category: categories.find(c => c.title === selectedCategory)?.folder || 'mixed'
-      });
-    }
-    
-    setQuestions([]);
-    setCurrentQuiz(null);
-    setCurrentQuestion(0);
-    setUserAnswers([]);
-    setSelectedOption(null);
-    setShowResults(false);
-    setShowTutorExplanations(false);
-    setTutorExplanations([]);
-  };
-
   const currentQ = questions[currentQuestion];
   const score = userAnswers.filter(a => a.isCorrect).length;
   const progress = questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
@@ -366,6 +351,7 @@ const QuizInterface: React.FC = () => {
 
       <div className="min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4">
+
           {!selectedCategory && (
             <div className="text-center">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Quizzes</h1>
@@ -456,7 +442,6 @@ const QuizInterface: React.FC = () => {
                   <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-8 leading-relaxed">
                     {currentQ.question}
                   </h2>
-
                   <div className="grid gap-4">
                     {Object.entries(currentQ.options).map(([key, value]) => (
                       <Card
@@ -586,14 +571,14 @@ const QuizInterface: React.FC = () => {
                         <div className="flex gap-4">
                           <span className="text-gray-600">Your answer:</span>
                           <span className={answer.isCorrect ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
-                            {answer.selectedOption}: {questions[index].options[answer.selectedOption as keyof typeof questions[0]['options']]}
+                            {answer.selectedOption}: {questions[index]?.options[answer.selectedOption as keyof typeof questions[0]['options']]}
                           </span>
                         </div>
                         {!answer.isCorrect && (
                           <div className="flex gap-4">
                             <span className="text-gray-600">Correct answer:</span>
                             <span className="text-green-600 font-medium">
-                              {answer.correctAnswer}: {questions[index].options[answer.correctAnswer as keyof typeof questions[0]['options']]}
+                              {answer.correctAnswer}: {questions[index]?.options[answer.correctAnswer as keyof typeof questions[0]['options']]}
                             </span>
                           </div>
                         )}
@@ -607,7 +592,7 @@ const QuizInterface: React.FC = () => {
                 <Button variant="outline" onClick={restartQuiz}>
                   Retake Quiz
                 </Button>
-                <Button onClick={completeQuiz} className="bg-blue-600 hover:bg-blue-700">
+                <Button onClick={returnToQuizList} className="bg-blue-600 hover:bg-blue-700">
                   Back to Quizzes
                 </Button>
               </div>

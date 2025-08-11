@@ -14,7 +14,7 @@ const fileRoutes = require('./routes/files');
 const quizRoutes = require('./routes/quizzes');
 const flashcardRoutes = require('./routes/flashcards');
 const sessionRoutes = require('./routes/sessions');
-const tutorRoutes = require('./routes/tutor');
+const tutorRoutes = require('./routes/tutorRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
