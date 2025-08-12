@@ -13,11 +13,12 @@ except Exception as e:
     sys.exit(1)
 
 def load_data_from_db(material_id, user_answers_path):
-    material = db.materials.find_one({"_id": ObjectId(material_id)})
+    # This function remains unchanged
+    material = db.materials.find_one({"_id": ObjectId(material_id)}) #
     if not material:
         raise ValueError(f"Material with ID {material_id} not found in the database.")
     
-    quiz_data = material.get('quiz_content')
+    quiz_data = material.get('quiz_content') #
     if not quiz_data:
         raise ValueError(f"Quiz content not found in material {material_id}.")
 
@@ -25,9 +26,10 @@ def load_data_from_db(material_id, user_answers_path):
         user_answers_data = json.load(f)
     
     user_answers = user_answers_data.get('answers', [])
-    return material, quiz_data, user_answers # Return the full material document
+    return material, quiz_data, user_answers
 
 def explain_wrong_answers(quiz_data, user_answers):
+    # This function remains unchanged
     wrong_questions = []
     for user_ans_obj in user_answers:
         if not user_ans_obj.get('isCorrect', False):
@@ -71,12 +73,15 @@ Provide a clear explanation for why the correct answer is right and the student'
     return explanations
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python ai_tutor.py <material_id> <user_answers_json_path>", file=sys.stderr)
+    # --- CHANGE 1: Expect a 4th argument (3 from Node + script name) ---
+    if len(sys.argv) != 4:
+        print("Usage: python ai_tutor.py <material_id> <user_answers_json_path> <attempt_id>", file=sys.stderr) #
         sys.exit(1)
     
     material_id = sys.argv[1]
     user_answers_path = sys.argv[2]
+    # --- CHANGE 2: Get the attempt_id from the new argument ---
+    attempt_id = sys.argv[3]
     
     if not os.path.isfile(user_answers_path):
         print(f"User answers file not found: {user_answers_path}", file=sys.stderr)
@@ -90,10 +95,11 @@ def main():
 
     explanations = explain_wrong_answers(quiz_data, user_answers)
 
-    base_name = os.path.splitext(material.get("filename", "unknown_file"))[0]
+    base_name = os.path.splitext(material.get("filename", "unknown_file"))[0] #
     output_dir = "tutor_explanations"
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, f"{base_name}_tutor_explanations.json")
+    # --- CHANGE 3: Use the attempt_id in the output filename ---
+    output_path = os.path.join(output_dir, f"{base_name}_{attempt_id}_tutor_explanations.json")
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(explanations, f, indent=2, ensure_ascii=False)

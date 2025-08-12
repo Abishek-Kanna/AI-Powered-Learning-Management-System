@@ -64,6 +64,10 @@ const QuizInterface: React.FC = () => {
   const [tutorLoading, setTutorLoading] = useState(false);
   const [tutorError, setTutorError] = useState<string | null>(null);
 
+  // --- ADDED STATE ---
+  // This holds the unique ID for each quiz attempt to fetch the correct explanation.
+  const [currentAttemptId, setCurrentAttemptId] = useState<string | null>(null);
+
   const categories: QuizCard[] = [
     { title: 'Python',          description: 'Python programming quizzes',   icon: '🐍', color: 'bg-blue-100',    folder: 'python' },
     { title: 'Java',            description: 'Java programming quizzes',     icon: '☕', color: 'bg-red-100',     folder: 'java'   },
@@ -110,6 +114,7 @@ const QuizInterface: React.FC = () => {
       setShowTutorExplanations(false);
       setTutorExplanations([]);
       setTutorError(null);
+      setCurrentAttemptId(null); // Reset attempt ID on new quiz start
       
       if (selectedCategory) {
         startSession({
@@ -126,6 +131,8 @@ const QuizInterface: React.FC = () => {
     }
   };
 
+  // --- UPDATED FUNCTION ---
+  // This function now gets a unique attemptId from the backend and uses it for polling.
   const triggerAiTutor = async () => {
     const currentCategoryFolder = categories.find(c => c.title === selectedCategory)?.folder;
     if (!currentQuiz || !currentCategoryFolder) {
@@ -138,7 +145,7 @@ const QuizInterface: React.FC = () => {
     setTutorExplanations([]);
 
     try {
-      await fetch('http://localhost:3001/api/tutor/trigger', {
+      const triggerRes = await fetch('http://localhost:3001/api/tutor/trigger', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -148,19 +155,31 @@ const QuizInterface: React.FC = () => {
         }),
       });
 
-      // --- START: New Polling Logic ---
-      const pollInterval = 5000; // Check every 5 seconds
-      const pollTimeout = 180000; // Stop trying after 3 minutes
+      if (!triggerRes.ok) {
+        throw new Error('Failed to trigger AI tutor process.');
+      }
+
+      const triggerData = await triggerRes.json();
+      const attemptId = triggerData.attemptId;
+
+      if (!attemptId) {
+        throw new Error('Could not get a valid attempt ID from the server.');
+      }
+      
+      setCurrentAttemptId(attemptId); // Store the ID for polling
+
+      const pollInterval = 5000;
+      const pollTimeout = 180000;
 
       const pollId = setInterval(async () => {
         try {
-          const res = await fetch(`http://localhost:3001/api/tutor/explanations/${encodeURIComponent(currentQuiz)}`);
+          const res = await fetch(`http://localhost:3001/api/tutor/explanations/${encodeURIComponent(currentQuiz)}/${attemptId}`);
           if (res.ok) {
             const explanations = await res.json();
             setTutorExplanations(explanations);
             setShowTutorExplanations(true);
             setTutorLoading(false);
-            clearInterval(pollId); // Stop polling on success
+            clearInterval(pollId);
             clearTimeout(timeoutId);
           }
         } catch (pollError) {
@@ -169,11 +188,10 @@ const QuizInterface: React.FC = () => {
       }, pollInterval);
 
       const timeoutId = setTimeout(() => {
-        clearInterval(pollId); // Stop polling on timeout
+        clearInterval(pollId);
         setTutorError('The AI tutor timed out. Please try again.');
         setTutorLoading(false);
       }, pollTimeout);
-      // --- END: New Polling Logic ---
 
     } catch (error) {
       setTutorError(error instanceof Error ? error.message : 'Failed to trigger AI tutor');
@@ -208,6 +226,7 @@ const QuizInterface: React.FC = () => {
     setShowResults(false);
     setShowTutorExplanations(false);
     setTutorExplanations([]);
+    setCurrentAttemptId(null);
   };
 
   const backButton = async () => {
@@ -316,6 +335,7 @@ const QuizInterface: React.FC = () => {
     setShowResults(false);
     setShowTutorExplanations(false);
     setTutorExplanations([]);
+    setCurrentAttemptId(null);
     
     if (currentQuiz && selectedCategory) {
       startSession({
