@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { 
-  saveUserAnswers, 
-  saveFlashcardSession, 
   saveStudySession,
   getUserQuizStats,
   getUserFlashcardStats,
@@ -10,63 +8,50 @@ const {
   getUserDetailedHistory
 } = require('../services/sessionService');
 
-router.post('/user-answers', express.json(), (req, res) => {
+// This route now receives the data from the frontend and saves it.
+router.post('/study-session', express.json(), async (req, res) => {
   try {
-    const result = saveUserAnswers(req.body);
-    res.json(result);
+    // Added a log to confirm the request is received
+    console.log('✅ Received request to save study session:', req.body); 
+    const result = await saveStudySession(req.body);
+    res.status(201).json(result);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('❌ Failed to save study session:', error);
+    res.status(500).json({ error: 'Failed to save session.', details: error.message });
   }
 });
 
-router.post('/flashcard-session', express.json(), (req, res) => {
+// --- GET ROUTES for fetching stats ---
+router.get('/quiz-stats/:userId', async (req, res) => {
   try {
-    const result = saveFlashcardSession(req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-router.post('/study-session', express.json(), (req, res) => {
-  try {
-    const result = saveStudySession(req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-router.get('/quiz-stats', (req, res) => {
-  try {
-    const stats = getUserQuizStats();
+    const stats = await getUserQuizStats(req.params.userId);
     res.json(stats);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get('/flashcard-stats', (req, res) => {
+router.get('/flashcard-stats/:userId', async (req, res) => {
   try {
-    const stats = getUserFlashcardStats();
+    const stats = await getUserFlashcardStats(req.params.userId);
     res.json(stats);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get('/activity-stats', (req, res) => {
+router.get('/activity-stats/:userId', async (req, res) => {
   try {
-    const stats = getUserActivityStats();
+    const stats = await getUserActivityStats(req.params.userId);
     res.json(stats);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get('/detailed-history', (req, res) => {
+router.get('/detailed-history/:userId', async (req, res) => {
   try {
-    const history = getUserDetailedHistory();
+    const history = await getUserDetailedHistory(req.params.userId);
     res.json(history);
   } catch (error) {
     res.status(500).json({ error: error.message });

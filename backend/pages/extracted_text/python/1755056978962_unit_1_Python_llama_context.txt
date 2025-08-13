@@ -1,0 +1,31 @@
+• Concept 1: Two Sum
+   Points: This problem involves finding two numbers within an array that add up to a target value.
+   Explanation: The "Two Sum" problem is a classic example of using nested loops to iterate through all possible pairs of numbers in an array. For each pair, it checks if their sum equals the target. The problem emphasizes the use of hash maps or dictionaries to store and retrieve previously encountered sums efficiently, reducing the time complexity. The key point is the constraint that the same element cannot be used twice.
+
+• Concept 2: Contains Duplicate
+   Points: This problem deals with determining whether any element appears more than once in an array.
+   Explanation: The core idea is to sort the array first. After sorting, adjacent elements will be equal if duplicates exist. The algorithm then iterates through the sorted array, comparing each element with its adjacent element. If a duplicate is found, the function immediately returns `true`. If the loop completes without finding any duplicates, it means every element is unique, and the function returns `false`.
+
+• Concept 3: Single Number
+   Points: This problem asks for finding a single integer in an array where every other integer appears twice.
+   Explanation: The problem can be solved efficiently by using the bitwise XOR operator. XOR has the property that a number XORed with itself results in 0, and a number XORed with 0 results in itself. Therefore, iterating through the array and XORing all the elements together will cancel out the duplicate elements, leaving only the single number. This approach provides a linear time and constant space solution.
+
+• Concept 4: Intersection of Two Arrays
+   Points: This problem challenges finding the common elements between two arrays, considering their frequency.
+   Explanation:  The most efficient approach involves using a hash map (or dictionary) to count the occurrences of each element in the first array. Then, iterate through the second array and for each element, check if it exists in the hash map. If it does, increment the count in the hash map. Finally, return the elements that have a count greater than 0 in the hash map. This method provides a time complexity of O(m + n), where m and n are the lengths of the input arrays, and it efficiently handles duplicate elements.
+
+• Concept 5: N-ary Tree Preorder Traversal
+    Points: This problem involves traversing an n-ary tree in preorder traversal order.
+    Explanation: Preorder traversal means visiting the root node first, then the nodes in the left subtree, and finally the nodes in the right subtree. This problem emphasizes understanding the structure of an n-ary tree and how to recursively traverse it. The input is a level order traversal which represents the tree structure.  The function processes the levels of the tree, building the final array with the nodes' values in the correct preorder sequence.
+
+• Concept 6: Pascal’s Triangle
+    Points: This problem involves constructing Pascal’s triangle for a given number of rows.
+    Explanation: Pascal’s triangle is a triangular array of numbers where each number is the sum of the two numbers directly above it in the previous row. The algorithm efficiently constructs the triangle row by row, calculating each element based on the previous row. The key is understanding the mathematical relationship between consecutive rows.
+
+• Concept 7: Longest Substring Without Repeating Characters
+   Points: This problem focuses on finding the longest substring within a given string that contains no repeating characters.
+   Explanation: The core strategy is using a sliding window approach combined with a hash map (or dictionary). The hash map stores the most recent index of each character encountered. The window expands as long as the current character is not in the hash map. If a repeating character is found, the window's left boundary is moved to the right, effectively removing the repeating character from the window. The algorithm maintains the longest substring found so far.
+
+• Concept 8: First Unique Character in a String
+   Points: This problem asks to find the first non-repeating character in a string.
+   Explanation: The algorithm uses a hash map (or dictionary) to store the character counts in the string. It iterates through the string, updating the counts in the hash map. Then, it iterates again, checking the counts in the hash map. The first character with a count of 1 is the desired result. This approach effectively identifies the first unique character in O(n) time.

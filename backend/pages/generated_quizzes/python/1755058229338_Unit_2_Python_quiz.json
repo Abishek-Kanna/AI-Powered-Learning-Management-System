@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Which concept primarily involves combining two sorted lists into a single sorted list?",
+    "options": {
+      "A": "Array In-Place Reversal",
+      "B": "Merge Two Sorted Lists",
+      "C": "Palindrome Detection",
+      "D": "Maximum Profit Calculation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main goal of 'In-Place Array Manipulation'?",
+    "options": {
+      "A": "Creating a new array to store the result.",
+      "B": "Modifying an existing array directly without creating a new one.",
+      "C": "Sorting an array in ascending order.",
+      "D": "Searching for a specific element within an array."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The ‘Reverse Bits’ problem demonstrates which concept?",
+    "options": {
+      "A": "Linked List Traversal and Node Operations",
+      "B": "String Manipulation",
+      "C": "In-Place Array Manipulation",
+      "D": "Maximum Profit Calculation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a key operation involved in the ‘Merge Two Sorted Lists’ problem?",
+    "options": {
+      "A": "Swapping elements within a single list.",
+      "B": "Comparing and appending elements from two sorted lists to a new sorted list.",
+      "C": "Reversing the order of elements in the merged list.",
+      "D": "Searching for the largest element in the input lists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The ‘Reverse String’ problem requires which type of string manipulation?",
+    "options": {
+      "A": "Concatenating strings.",
+      "B": "Reversing the order of characters within the string.",
+      "C": "Finding the longest substring.",
+      "D": "Counting character frequencies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The ‘Best Time to Buy and Sell Stock’ problem is centered around:",
+    "options": {
+      "A": "Determining the highest stock price.",
+      "B": "Calculating the potential profit from buying and selling a stock.",
+      "C": "Predicting future stock prices.",
+      "D": "Analyzing market trends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of the ‘Valid Palindrome’ problem?",
+    "options": {
+      "A": "To find the most frequent character in a string.",
+      "B": "To determine if a string is a palindrome (reads the same forward and backward).",
+      "C": "To encrypt a string for security.",
+      "D": "To sort the string alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The ‘Maximum Profit Calculation’ problem relies on tracking:",
+    "options": {
+      "A": "The total number of stocks traded.",
+      "B": "The minimum and maximum profit encountered.",
+      "C": "The stock prices at each time interval.",
+      "D": "The number of unique stock symbols."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which concept involves reversing the order of elements within an array without using auxiliary data structures?",
+    "options": {
+      "A": "Linked List Traversal and Node Operations",
+      "B": "String Manipulation",
+      "C": "Array In-Place Reversal",
+      "D": "Maximum Profit Calculation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "The ‘Valid Palindrome’ problem necessitates converting a string to lowercase as part of the process, primarily to:",
+    "options": {
+      "A": "Increase the string length.",
+      "B": "Remove non-alphanumeric characters.",
+      "C": "Sort the string alphabetically.",
+      "D": "Encrypt the string."
+    },
+    "answer": "B"
+  }
+]

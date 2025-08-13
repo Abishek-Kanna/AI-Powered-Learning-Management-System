@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is the primary goal of the 'Merge Two Sorted Lists' problem?",
+    "answer": "To efficiently combine two sorted lists into a single sorted list, demonstrating understanding of linked list manipulation and sorting algorithms."
+  },
+  {
+    "question": "What is 'in-place array manipulation' and why is it beneficial?",
+    "answer": "It's modifying an array directly without creating a new one, typically using swapping or pointer adjustments. It's more memory-efficient."
+  },
+  {
+    "question": "How does linked list traversal play a role in 'Merge Two Sorted Lists'?",
+    "answer": "It requires iterating through both input lists, comparing elements and creating new nodes to add to the merged list while maintaining the sorted order."
+  },
+  {
+    "question": "Describe the 'Reverse Bits' problem and how it exemplifies in-place array manipulation.",
+    "answer": "The 'Reverse Bits' problem demonstrates in-place manipulation by carefully swapping the bits of an integer, modifying the existing value without allocating extra memory."
+  },
+  {
+    "question": "What is meant by 'string manipulation' and give a simple example?",
+    "answer": "It involves operations on strings, like reversing a string by swapping characters, which requires character-by-character processing."
+  },
+  {
+    "question": "Explain the core logic behind the 'Best Time to Buy and Sell Stock' problem.",
+    "answer": "It involves tracking the minimum price encountered so far and calculating the potential profit if you were to buy at that minimum and sell at the current price, aiming for the maximum profit."
+  },
+  {
+    "question": "What steps are involved in detecting a palindrome?",
+    "answer": "It involves removing non-alphanumeric characters and converting the string to lowercase, then comparing the processed string with its reverse."
+  },
+  {
+    "question": "What is the concept of 'in-place array reversal'?",
+    "answer": "Reversing the order of elements within an array without using any additional data structures."
+  },
+  {
+    "question": "How does the 'Best Time to Buy and Sell Stock' problem relate to profit maximization?",
+    "answer": "The problem focuses on identifying the optimal time to buy and sell a stock to maximize profit, considering the stock price fluctuations over a specified period."
+  },
+  {
+    "question": "Why is understanding linked lists important for 'Merge Two Sorted Lists'?",
+    "answer": "Linked lists are inherently structured to hold data in a sequential manner, making them perfect for managing the iterative process of comparing and merging sorted lists efficiently."
+  }
+]

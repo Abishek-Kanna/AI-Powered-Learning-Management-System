@@ -5,7 +5,7 @@ class AuthManager {
   static async registerUser(username, email, password, role = 'student') {
     // ... your registerUser function is correct and does not need changes
     try {
-      const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+      const existingUser = await User.findOne({ username }).select('+password');
       if (existingUser) {
         throw new Error('Username or email already exists');
       }

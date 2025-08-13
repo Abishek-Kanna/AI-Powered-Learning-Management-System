@@ -25,7 +25,6 @@ Respond ONLY in JSON format as a list of dicts. Each dict should have:
         {"role": "user", "content": prompt}
     ])
 
-    # --- START: New robust JSON cleaning logic ---
     content = response['message']['content']
     
     json_start = content.find('[')
@@ -42,14 +41,16 @@ Respond ONLY in JSON format as a list of dicts. Each dict should have:
     else:
         print("ERROR: No valid JSON list found in the model's response.", file=sys.stderr)
         return None
-    # --- END: New robust JSON cleaning logic ---
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python flashcard_generator.py <context_txt_path> [num_flashcards]", file=sys.stderr)
+    # --- CHANGE 1: Update argument handling to require a subject ---
+    if len(sys.argv) < 3:
+        print("Usage: python flashcard_generator.py <context_txt_path> <subject> [num_flashcards]", file=sys.stderr)
         sys.exit(1)
     
     context_path = sys.argv[1]
+    subject = sys.argv[2] # Get the subject from the new argument
+
     if not os.path.isfile(context_path):
         print(f"File not found: {context_path}", file=sys.stderr)
         sys.exit(1)
@@ -58,22 +59,27 @@ def main():
         text = f.read()
 
     num_flashcards = 10
-    if len(sys.argv) >= 3:
+    if len(sys.argv) >= 4: # Optional num_flashcards is now the 4th argument
         try:
-            num_flashcards = int(sys.argv[2])
+            num_flashcards = int(sys.argv[3])
         except ValueError:
             pass
 
-    print(f"Generating {num_flashcards} flashcards using Gemma3...")
+    print(f"Generating {num_flashcards} flashcards for subject '{subject}' using Gemma3...")
     flashcard_json = generate_flashcards(text, num_flashcards=num_flashcards)
 
     if flashcard_json is None:
         sys.exit(1)
 
-    # You may need to update this to accept a subject, similar to the quiz generator
-    os.makedirs("generated_flashcards", exist_ok=True)
+    # --- CHANGE 2: Use the subject to build the correct output path ---
+    # The output directory now includes the subject subfolder
+    output_dir = os.path.join("generated_flashcards", subject)
+    os.makedirs(output_dir, exist_ok=True)
+
     base_name = os.path.splitext(os.path.basename(context_path))[0].replace('_llama_context', '')
-    output_path = os.path.join("generated_flashcards", f"{base_name}_flashcards.json")
+    
+    # The final path will be inside the correct subject folder
+    output_path = os.path.join(output_dir, f"{base_name}_flashcards.json")
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(flashcard_json)

@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is the core concept of the 'Two Sum' problem?",
+    "answer": "Finding two numbers within an array that add up to a target value, often using hash maps for efficiency and ensuring the same element isn't used twice."
+  },
+  {
+    "question": "How does the 'Contains Duplicate' problem efficiently detect duplicates?",
+    "answer": "By sorting the array. Adjacent elements will be equal if duplicates exist, and then iterating to compare them."
+  },
+  {
+    "question": "What is the primary method for solving the 'Single Number' problem?",
+    "answer": "Using the bitwise XOR operator, which cancels out duplicate elements, leaving the single number."
+  },
+  {
+    "question": "What is the most efficient approach to find the 'Intersection of Two Arrays'?",
+    "answer": "Using a hash map to count element occurrences in the first array and then iterating through the second array to check for matches."
+  },
+  {
+    "question": "What does 'N-ary Tree Preorder Traversal' mean?",
+    "answer": "Visiting the root node first, then the nodes in the left subtree, and finally the nodes in the right subtree, based on the level order traversal input."
+  },
+  {
+    "question": "How is Pascal’s Triangle constructed?",
+    "answer": "By row by row calculation, where each number is the sum of the two numbers directly above it in the previous row."
+  },
+  {
+    "question": "What is the sliding window approach used for in the 'Longest Substring Without Repeating Characters' problem?",
+    "answer": "A technique combined with a hash map to efficiently identify the longest substring with unique characters, adjusting the window's boundaries as needed."
+  },
+  {
+    "question": "How does the 'First Unique Character in a String' problem utilize a hash map?",
+    "answer": "A hash map stores character counts in the string, allowing for efficient identification of the first character with a count of 1."
+  },
+  {
+    "question": "What property of the XOR operator is key to solving the 'Single Number' problem?",
+    "answer": "A number XORed with itself results in 0, and a number XORed with 0 results in itself."
+  },
+  {
+    "question": "What is the key element of the 'Intersection of Two Arrays' solution's efficiency?",
+    "answer": "Using a hash map allows for O(m + n) time complexity, where m and n are the lengths of the input arrays."
+  }
+]

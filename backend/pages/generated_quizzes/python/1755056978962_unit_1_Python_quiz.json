@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Which problem involves finding two numbers within an array that add up to a target value, emphasizing the use of hash maps to efficiently reduce time complexity?",
+    "options": {
+      "A": "Contains Duplicate",
+      "B": "Single Number",
+      "C": "Two Sum",
+      "D": "Intersection of Two Arrays"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "To determine if any element appears more than once in an array, the most efficient approach is to:",
+    "options": {
+      "A": "Sort the array and compare adjacent elements.",
+      "B": "Use the bitwise XOR operator on all elements.",
+      "C": "Sort the array and compare adjacent elements.",
+      "D": "Use a hash map to count element occurrences."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "The problem of finding a single integer in an array where every other integer appears twice can be solved most efficiently using:",
+    "options": {
+      "A": "Sorting the array.",
+      "B": "A hash map to store element counts.",
+      "C": "The bitwise XOR operator.",
+      "D": "Two pointers traversing the array."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which approach is most suitable for finding the common elements between two arrays, considering their frequency?",
+    "options": {
+      "A": "Sorting both arrays and comparing them.",
+      "B": "Using a hash map to store element counts in the first array.",
+      "C": "Using a nested loop to compare each element.",
+      "D": "Applying the single number algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The core concept of N-ary Tree Preorder Traversal involves:",
+    "options": {
+      "A": "Breadth-first traversal of the tree.",
+      "B": "Traversing the nodes in preorder (root, left subtree, right subtree).",
+      "C": "Depth-first traversal with left-to-right exploration.",
+      "D": "Level order traversal of the tree."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Pascal’s Triangle is constructed based on the principle that each number is the sum of the two numbers directly above it in the previous row.",
+    "options": {
+      "A": "Each number is the product of the two numbers above it.",
+      "B": "Each number is the sum of the two numbers diagonally above it.",
+      "C": "Each number is the difference between the two numbers above it.",
+      "D": "Each number is the average of the two numbers above it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The Longest Substring Without Repeating Characters problem utilizes a sliding window approach, combined with a hash map, to achieve optimal performance.",
+    "options": {
+      "A": "Using a nested loop to compare each character in the string.",
+      "B": "Using a brute-force approach to generate all possible substrings.",
+      "C": "Using a sliding window and a hash map to track character indices.",
+      "D": "Sorting the string and checking for consecutive repeating characters."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "To find the first non-repeating character in a string, which data structure is most effectively used to store character counts?",
+    "options": {
+      "A": "An array of booleans.",
+      "B": "A linked list.",
+      "C": "A hash map (or dictionary).",
+      "D": "A stack."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary goal of the ‘Two Sum’ problem?",
+    "options": {
+      "A": "To detect duplicate elements in an array.",
+      "B": "To find the largest number in the array.",
+      "C": "To find two numbers that add up to a specific target value.",
+      "D": "To sort the array in ascending order."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which approach is most suitable for determining if any element appears more than once in an array?",
+    "options": {
+      "A": "Using a brute-force approach of comparing all possible pairs of elements.",
+      "B": "Sorting the array and then comparing adjacent elements.",
+      "C": "Using recursion to traverse the array.",
+      "D": "Using a stack to store the elements."
+    },
+    "answer": "B"
+  }
+]

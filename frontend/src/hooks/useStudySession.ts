@@ -1,13 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
+import { useAuth } from '@/components/auth/auth';
 
-interface StudySessionData {
+export interface StudySessionData {
   sessionType: 'quiz' | 'flashcard' | 'tutor';
   activity: string;
   category: string;
   score?: number;
+  correctAnswers?: number;
+  totalQuestions?: number;
+  cardsReviewed?: number;
+  totalCards?: number;
 }
 
 export const useStudySession = () => {
+  const { user } = useAuth();
   const [isActive, setIsActive] = useState(false);
   const [duration, setDuration] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -36,20 +42,23 @@ export const useStudySession = () => {
     const finalDuration = Math.floor((Date.now() - startTimeRef.current.getTime()) / 1000 / 60); // minutes
     
     try {
-      await fetch('http://localhost:3001/api/study-session', {
+      // ✅ THE FIX IS ON THIS LINE: Corrected the URL path
+      await fetch('http://localhost:3001/api/sessions/study-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...sessionData,
-          duration: finalDuration
+          duration: finalDuration,
+          userId: user?.id
         }),
       });
       
       console.log('Study session ended:', {
         ...sessionData,
-        duration: finalDuration
+        duration: finalDuration,
+        userId: user?.id
       });
     } catch (error) {
       console.error('Error saving study session:', error);

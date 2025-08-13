@@ -1,81 +1,63 @@
 const path = require('path');
 const fs = require('fs');
 
+/**
+ * Gets a list of available flashcard sets for a category.
+ */
 exports.getFlashcardList = (category) => {
-  const categoryDir = path.join(__dirname, '../generated_flashcards', category);
+  // --- THIS PATH IS NOW CORRECTED ---
+  // It now looks inside the 'pages' directory.
+  const categoryDir = path.join(__dirname, '../pages/generated_flashcards', category);
   
   if (!fs.existsSync(categoryDir)) {
     return { flashcards: [] };
   }
   
   const allFiles = fs.readdirSync(categoryDir);
-  const jsonFiles = allFiles.filter(file => file.toLowerCase().endsWith('.json'));
-  const flashcardNames = jsonFiles.map(file => file.replace('.json', ''));
+  const jsonFiles = allFiles
+    .filter(file => file.toLowerCase().endsWith('.json'))
+    .map(file => {
+      const filePath = path.join(categoryDir, file);
+      const stats = fs.statSync(filePath);
+      return {
+        name: file.replace('.json', '').replace(/_flashcards$/, '').replace(/_/g, ' '),
+        filename: file,
+        created: stats.mtime.toISOString(),
+        size: stats.size
+      };
+    })
+    .sort((a, b) => new Date(b.created) - new Date(a.created));
   
-  return { flashcards: flashcardNames, category };
+  return { flashcards: jsonFiles, category };
 };
 
-exports.getFlashcards = (category, flashcardName) => {
-  const categoryDir = path.join(__dirname, '../generated_flashcards', category);
+/**
+ * Gets the content of a single flashcard file.
+ */
+exports.getFlashcards = (category, filename) => {
+  // --- THIS PATH IS ALSO CORRECTED ---
+  const filePath = path.join(__dirname, '../pages/generated_flashcards', category, filename);
   
-  if (!fs.existsSync(categoryDir)) {
-    const error = new Error('Category directory not found');
-    error.status = 404;
-    throw error;
-  }
-  
-  const possibleFilenames = [
-    `${flashcardName}.json`,
-    `${flashcardName}_flashcards.json`,
-    `${flashcardName}_llama_context_flashcards.json`
-  ];
-  
-  let foundFilePath = null;
-  
-  for (const filename of possibleFilenames) {
-    const filePath = path.join(categoryDir, filename);
-    if (fs.existsSync(filePath)) {
-      foundFilePath = filePath;
-      break;
-    }
-  }
-  
-  if (!foundFilePath) {
-    const files = fs.readdirSync(categoryDir);
-    const requestedNameLower = flashcardName.toLowerCase();
-    
-    for (const file of files) {
-      if (file.toLowerCase().endsWith('.json')) {
-        const fileNameWithoutExt = file.replace('.json', '').toLowerCase();
-        if (fileNameWithoutExt === requestedNameLower || 
-            fileNameWithoutExt.includes(requestedNameLower)) {
-          foundFilePath = path.join(categoryDir, file);
-          break;
-        }
-      }
-    }
-  }
-  
-  if (!foundFilePath) {
+  if (!fs.existsSync(filePath)) {
     const error = new Error('Flashcard file not found');
     error.status = 404;
     throw error;
   }
   
-  const fileContent = fs.readFileSync(foundFilePath, 'utf8');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
   let flashcardData;
   
   try {
     flashcardData = JSON.parse(fileContent);
   } catch (parseError) {
-    const error = new Error('Invalid JSON format');
-    error.status = 400;
+    const error = new Error('Invalid JSON format in flashcard file');
+    error.status = 500;
     throw error;
   }
   
   if (!Array.isArray(flashcardData)) {
-    const error = new Error('Invalid flashcard format');
-    error.status = 400;
+    const error = new Error('Invalid flashcard format: data is not an array');
+    error.status = 500;
     throw error;
   }
   

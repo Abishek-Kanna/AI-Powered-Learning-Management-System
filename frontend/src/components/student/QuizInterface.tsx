@@ -280,15 +280,19 @@ const QuizInterface: React.FC = () => {
   };
 
   const handleQuizComplete = async (answers: UserAnswer[]) => {
-    const score = answers.filter(a => a.isCorrect).length;
-    const percentage = Math.round((score / questions.length) * 100);
+    const correctAnswers = answers.filter(a => a.isCorrect).length;
+    const totalQuestions = questions.length;
+    const percentage = Math.round((correctAnswers / totalQuestions) * 100);
     
     if (currentQuiz && selectedCategory) {
+      // Pass a more detailed payload to endSession
       await endSession({
         sessionType: 'quiz',
         activity: currentQuiz,
         category: categories.find(c => c.title === selectedCategory)?.folder || 'mixed',
-        score: percentage
+        score: percentage,
+        correctAnswers: correctAnswers,
+        totalQuestions: totalQuestions
       });
     }
     setShowResults(true);

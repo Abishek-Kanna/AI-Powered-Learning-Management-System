@@ -1,0 +1,67 @@
+[
+  {
+    "index": 1,
+    "question": "Which concept focuses on identifying the longest contiguous sequence of characters within a string where no two adjacent characters are the same?",
+    "user_answer": "A",
+    "correct_answer": "C",
+    "options": {
+      "A": "Finding All Anagrams in a String",
+      "B": "Roman to Integer",
+      "C": "Longest Substring Without Repeating Characters",
+      "D": "Repeated Substring Pattern"
+    },
+    "explanation": "Okay, let’s break down why the correct answer is C) Longest Substring Without Repeating Characters and why your initial answer of A) Finding All Anagrams in a String was incorrect.\n\nThe question is asking you to identify a specific problem related to string manipulation. The core concept involves finding the longest sequence of characters in a string where no two adjacent characters are identical.\n\nOption C, “Longest Substring Without Repeating Characters,” directly addresses this problem. This algorithm is designed to find precisely that: the longest sequence of characters in a string where no two consecutive characters are the same.\n\nOption A, “Finding All Anagrams in a String,” deals with a completely different problem. Anagrams are words or phrases formed by rearranging the letters of another word or phrase. It doesn't involve the constraint of non-adjacent identical characters within a string.\n\nOption B, “Roman to Integer,” is a conversion problem, not a string manipulation problem related to character sequences.\n\nOption D, “Repeated Substring Pattern,” refers to identifying recurring patterns within a string, which isn't the same as finding the longest non-repeating sequence.\n\nEssentially, your initial answer focused on a different type of string problem – anagrams – while the question specifically asked about a substring with no repeated adjacent characters. The key difference is the constraint on identical adjacent characters."
+  },
+  {
+    "index": 3,
+    "question": "The algorithm for 'Finding All Anagrams in a String' typically involves counting character frequencies using a hash map. What is the main purpose of this step?",
+    "user_answer": "B",
+    "correct_answer": "D",
+    "options": {
+      "A": "To sort the pattern string",
+      "B": "To identify the longest substring",
+      "C": "To check if the pattern can be formed by repeated substrings",
+      "D": "To determine if the pattern exists in the string"
+    },
+    "explanation": "Okay, let's break down why the correct answer is D and why your initial answer was incorrect.\n\nThe core idea behind finding anagrams using a hash map is to efficiently compare the character frequencies of the pattern string with the character frequencies within the main string. Counting character frequencies with a hash map allows us to quickly determine if the pattern string *could* be formed by rearranging the characters present in the main string.\n\nOption D, “To determine if the pattern exists in the string,” perfectly captures this purpose. After creating the hash map representing the pattern’s character counts, we can then compare this hash map to the character frequency counts within the main string. If the two hash maps are identical, it means the main string contains all the characters of the pattern string with the same frequencies, and therefore, the pattern exists within the string.\n\nLet’s look at why your initial answer, B) “To identify the longest substring,” is wrong. Identifying the longest substring is a completely different problem. The hash map technique doesn’t focus on finding the longest substring; it's about checking if a *specific* pattern (anagram) exists. Sorting (option A) would be a completely different approach, and option C is also related to a different algorithm for anagram detection, often involving sorting.\n\nEssentially, the hash map creates a signature for the pattern string based on its character counts. This signature is then compared to the string you're searching within. Does the string have the same ‘signature’? If so, it's an anagram!"
+  },
+  {
+    "index": 6,
+    "question": "The 'Number of Matching Subsequences' problem utilizes a sliding window approach. What is the core logic of this approach?",
+    "user_answer": "A",
+    "correct_answer": "D",
+    "options": {
+      "A": "To sort the input string",
+      "B": "To iterate through the string from both ends",
+      "C": "To check if the string can be constructed by repeated substrings",
+      "D": "To find the longest substring that is an anagram"
+    },
+    "explanation": "Okay, let's break down why the correct answer is D and why your initial answer was incorrect.\n\nThe 'Number of Matching Subsequences' problem uses a sliding window technique to efficiently find subsequences that match a given pattern. The core logic of the sliding window approach is to maintain a window of a specific size (the length of the pattern in this case) and slide this window across the input string.  Essentially, you're checking if, at each position, a subsequence of that size matches the pattern.\n\nOption A, “To sort the input string,” is completely irrelevant to the sliding window technique. Sorting the input string wouldn't help you find matching subsequences. It’s a common misconception because sorting can be helpful in some subsequence problems, but not in this specific scenario.\n\nOption B, “To iterate through the string from both ends,” is also not the core of the sliding window. While you might use iteration, sliding from one end to the other isn't the fundamental idea.\n\nOption D, “To find the longest substring that is an anagram,” is the correct approach.  The sliding window keeps track of the characters in the window.  By comparing the characters in the window to the pattern, you’re implicitly checking if they are an anagram (have the same characters with the same frequencies).  This is precisely what the sliding window does to determine if a subsequence matches.\n\nYour answer of A was incorrect because sorting the input string doesn’t contribute to the sliding window logic needed for this problem. The key is to maintain a window and compare its contents to the pattern, which is directly related to anagrams."
+  },
+  {
+    "index": 8,
+    "question": "The 'Jump Game II' algorithm focuses on minimizing the number of jumps to reach the end of an array. What strategy does it employ?",
+    "user_answer": "C",
+    "correct_answer": "B",
+    "options": {
+      "A": "Always jumping to the largest possible index",
+      "B": "Using a greedy approach to maximize reach with each jump",
+      "C": "Sorting the array",
+      "D": "Using recursion"
+    },
+    "explanation": "Okay, let's break down why the correct answer is B and why your initial answer was incorrect.\n\nThe ‘Jump Game II’ problem is about finding the *minimum* number of jumps needed to reach the end of an array. The core strategy is indeed a greedy one.  A greedy approach means making the \"best\" choice at each step, aiming to maximize the distance covered with each jump. In this case, “best” means jumping as far as possible.  You want to pick the index that allows you to jump the furthest.\n\nLet’s look at why your answer, C) Sorting the array, is wrong. Sorting the array doesn’t directly address the problem's core logic. Sorting wouldn’t help you determine the optimal jump distance. The problem isn’t about ordering the array; it’s about strategically choosing which index to jump from to maximize progress.\n\nOption A, Always jumping to the largest possible index, is essentially the correct understanding of the greedy approach. The algorithm explicitly tries to find the largest reachable index with each jump.\n\nOption D, Using recursion, is not the standard or most efficient solution for this problem.  While recursion *could* be used, it’s much more complex and less performant than the iterative greedy approach.\n\nTherefore, the correct answer is B) Using a greedy approach to maximize reach with each jump. It reflects the fundamental strategy of the algorithm."
+  },
+  {
+    "index": 10,
+    "question": "The 'Palindrome Number' concept primarily checks if an integer is a palindrome. What is the simplest way to determine this?",
+    "user_answer": "B",
+    "correct_answer": "A",
+    "options": {
+      "A": "To reverse the integer and compare it to the original",
+      "B": "To use a complex mathematical formula",
+      "C": "To use recursion",
+      "D": "To sort the digits"
+    },
+    "explanation": "Okay, let's break down why the correct answer is A and why your initial answer was incorrect.\n\nThe question asks for the simplest way to determine if a number is a palindrome. A palindrome number reads the same forwards and backward.\n\nOption A, “To reverse the integer and compare it to the original,” is the simplest and most common approach. Here’s how it works: You reverse the digits of the integer, and then you compare the reversed string to the original integer. If they are identical, the number is a palindrome. This method is easy to understand and implement.\n\nOption B, “To use a complex mathematical formula,” is completely unnecessary and a very inefficient way to solve this problem. Palindrome checking doesn’t require any complicated calculations.\n\nOption C, “To use recursion,” would be a much more involved solution and isn’t the simplest approach. Recursion is useful in certain situations, but it’s overkill for this straightforward problem.\n\nOption D, “To sort the digits,” is also an incorrect and highly complicated method. Sorting the digits would completely change the number and wouldn’t be a way to check if it's a palindrome.\n\nEssentially, reversing the number and comparing it to the original is the most direct and easiest way to check if a number is a palindrome.  It’s the most intuitive and efficient method.\n\nDo you want me to walk you through an example of how to reverse a number and check if it’s a palindrome in code?"
+  }
+]

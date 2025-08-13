@@ -93,7 +93,10 @@ class PipelineRunner:
             if not self.run_script("quiz_generator.py", [artifacts["context_txt"], subject, "10"]) or not self.validate_file(artifacts["quiz_json"], "quiz"):
                 raise ValueError("Quiz generation failed")
                 
-            self.run_script("flashcard_generator.py", [artifacts["context_txt"], "10"])
+            # --- THIS IS THE CORRECTED LINE ---
+            # Added the 'subject' argument and error checking for the flashcard generation step.
+            if not self.run_script("flashcard_generator.py", [artifacts["context_txt"], subject, "10"]) or not self.validate_file(artifacts["flashcards_json"], "flashcards"):
+                raise ValueError("Flashcard generation failed")
 
             self.log("Attempting to finalize material record in database...")
             try:
