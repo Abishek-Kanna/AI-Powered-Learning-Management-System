@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Which concept focuses on identifying the longest contiguous sequence of characters within a string where no two adjacent characters are the same?",
+    "options": {
+      "A": "Finding All Anagrams in a String",
+      "B": "Roman to Integer",
+      "C": "Longest Substring Without Repeating Characters",
+      "D": "Repeated Substring Pattern"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "The 'Repeated Substring Pattern' concept primarily aims to determine if a string can be constructed by repeatedly concatenating a substring. True or False?",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "It depends on the string",
+      "D": "It's irrelevant"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "The algorithm for 'Finding All Anagrams in a String' typically involves counting character frequencies using a hash map. What is the main purpose of this step?",
+    "options": {
+      "A": "To sort the pattern string",
+      "B": "To identify the longest substring",
+      "C": "To check if the pattern can be formed by repeated substrings",
+      "D": "To determine if the pattern exists in the string"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In the 'Roman to Integer' conversion, how does the algorithm handle different Roman numeral characters?",
+    "options": {
+      "A": "It simply adds all the Roman numerals together",
+      "B": "It uses a map to associate each Roman numeral with its corresponding integer value",
+      "C": "It performs complex mathematical operations",
+      "D": "It uses recursion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of the 'Add Binary' concept?",
+    "options": {
+      "A": "To reverse a binary string",
+      "B": "To convert a binary string to its decimal equivalent",
+      "C": "To find the longest binary substring",
+      "D": "To check if a string is binary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The 'Number of Matching Subsequences' problem utilizes a sliding window approach. What is the core logic of this approach?",
+    "options": {
+      "A": "To sort the input string",
+      "B": "To iterate through the string from both ends",
+      "C": "To check if the string can be constructed by repeated substrings",
+      "D": "To find the longest substring that is an anagram"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In the 'Reverse Vowels of a String' concept, what is the key step for reversing the vowels?",
+    "options": {
+      "A": "Sorting the vowels alphabetically",
+      "B": "Appending the vowels to a separate list and reversing that list",
+      "C": "Replacing all vowels with their reversed counterparts",
+      "D": "Using recursion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The 'Jump Game II' algorithm focuses on minimizing the number of jumps to reach the end of an array. What strategy does it employ?",
+    "options": {
+      "A": "Always jumping to the largest possible index",
+      "B": "Using a greedy approach to maximize reach with each jump",
+      "C": "Sorting the array",
+      "D": "Using recursion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which concept involves converting a Roman numeral string into its integer value?",
+    "options": {
+      "A": "Longest Substring Without Repeating Characters",
+      "B": "Roman to Integer",
+      "C": "Add Binary",
+      "D": "Reverse Vowels of a String"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The 'Palindrome Number' concept primarily checks if an integer is a palindrome. What is the simplest way to determine this?",
+    "options": {
+      "A": "To reverse the integer and compare it to the original",
+      "B": "To use a complex mathematical formula",
+      "C": "To use recursion",
+      "D": "To sort the digits"
+    },
+    "answer": "A"
+  }
+]

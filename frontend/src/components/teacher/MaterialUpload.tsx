@@ -3,8 +3,10 @@ import axios from 'axios';
 import { Loader2, CheckCircle2, XCircle, Upload, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 
 const MaterialUpload: React.FC = () => {
+  const navigate = useNavigate(); // 2. Initialize the navigate function
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [subject, setSubject] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
@@ -59,13 +61,12 @@ const MaterialUpload: React.FC = () => {
     setIsSuccess(false);
 
     try {
-      // Get token from localStorage for authenticated request
       const token = localStorage.getItem('token');
       
       const response = await axios.post('http://localhost:3001/api/files/upload', formData, {
         headers: { 
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}` // Add this for protected routes
+          'Authorization': `Bearer ${token}`
         },
       });
 
@@ -91,7 +92,17 @@ const MaterialUpload: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 relative">
+      {/* 3. Back to Dashboard Button Added */}
+      <div className="absolute top-4 left-4">
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/teacher/dashboard')}
+        >
+          &larr; Back to Dashboard
+        </Button>
+      </div>
+
       <div className="w-full max-w-2xl">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">📚 Upload Learning Material</h1>
@@ -160,4 +171,5 @@ const MaterialUpload: React.FC = () => {
     </div>
   );
 };
+
 export default MaterialUpload;

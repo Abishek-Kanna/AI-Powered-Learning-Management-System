@@ -198,3 +198,33 @@ ollama._types.ResponseError: model "gemma:2b" not found, try pulling it first (s
 [2025-08-11 14:19:23] [INFO] Attempting to finalize material record in database...
 [2025-08-11 14:19:23] [INFO] Database update successful. Matched: 1, Modified: 1
 [2025-08-11 14:19:23] [INFO] Pipeline completed for C:\Users\prese\Desktop\working\backend\input_pdfs\mixed\1754901923642_Business_Analytics_Assignment_04.pdf
+
+
+=== New Pipeline Session 2025-08-12 20:34:29 ===
+[2025-08-12 20:34:29] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\java\1755011069739_Unit-3_Python.pdf with Material ID: 689b57fd435e29a92d935eb1
+[2025-08-12 20:34:29] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\java\1755011069739_Unit-3_Python.pdf java
+[2025-08-12 20:35:19] [INFO] Script completed: extract.py
+[2025-08-12 20:35:19] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\context_generator.py C:\Users\prese\Desktop\working\backend\pages\extracted_text/java/1755011069739_Unit-3_Python_labeled.json
+[2025-08-12 20:38:17] [INFO] Script completed: context_generator.py
+[2025-08-12 20:38:17] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\quiz_generator.py C:\Users\prese\Desktop\working\backend\pages\extracted_text/java/1755011069739_Unit-3_Python_llama_context.txt java 10
+[2025-08-12 20:40:39] [INFO] Script completed: quiz_generator.py
+[2025-08-12 20:40:39] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\flashcard_generator.py C:\Users\prese\Desktop\working\backend\pages\extracted_text/java/1755011069739_Unit-3_Python_llama_context.txt 10
+[2025-08-12 20:42:15] [INFO] Script completed: flashcard_generator.py
+[2025-08-12 20:42:15] [INFO] Attempting to finalize material record in database...
+[2025-08-12 20:42:15] [INFO] Database update successful. Matched: 1, Modified: 1
+[2025-08-12 20:42:15] [INFO] Pipeline completed for C:\Users\prese\Desktop\working\backend\input_pdfs\java\1755011069739_Unit-3_Python.pdf
+
+
+=== New Pipeline Session 2025-08-13 08:29:48 ===
+[2025-08-13 08:29:48] [INFO] Starting pipeline for PDF: C:\Users\prese\Desktop\working\backend\input_pdfs\python\1755053987636_Unit-3_Python.pdf with Material ID: 689bffa3039c4b3bd03ebaab
+[2025-08-13 08:29:48] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\extract.py C:\Users\prese\Desktop\working\backend\input_pdfs\python\1755053987636_Unit-3_Python.pdf python
+[2025-08-13 08:30:41] [INFO] Script completed: extract.py
+[2025-08-13 08:30:41] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\context_generator.py C:\Users\prese\Desktop\working\backend\pages\extracted_text/python/1755053987636_Unit-3_Python_labeled.json
+[2025-08-13 08:32:56] [INFO] Script completed: context_generator.py
+[2025-08-13 08:32:56] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\quiz_generator.py C:\Users\prese\Desktop\working\backend\pages\extracted_text/python/1755053987636_Unit-3_Python_llama_context.txt python 10
+[2025-08-13 08:34:40] [INFO] Script completed: quiz_generator.py
+[2025-08-13 08:34:40] [INFO] Executing: python C:\Users\prese\Desktop\working\backend\pages\flashcard_generator.py C:\Users\prese\Desktop\working\backend\pages\extracted_text/python/1755053987636_Unit-3_Python_llama_context.txt 10
+[2025-08-13 08:35:56] [INFO] Script completed: flashcard_generator.py
+[2025-08-13 08:35:56] [INFO] Attempting to finalize material record in database...
+[2025-08-13 08:35:56] [INFO] Database update successful. Matched: 1, Modified: 1
+[2025-08-13 08:35:56] [INFO] Pipeline completed for C:\Users\prese\Desktop\working\backend\input_pdfs\python\1755053987636_Unit-3_Python.pdf

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 //================================================================
-// 1. TYPE DEFINITIONS FROM AuthContext
+// 1. TYPE DEFINITIONS & CONTEXT
 //================================================================
 type User = {
   id: string;
@@ -32,54 +32,49 @@ type AuthResponse = {
 
 type AuthContextType = {
   user: User | null;
+  token: string | null;
   login: (authData: AuthResponse) => void;
   logout: () => void;
   isAuthenticated: boolean;
   loading: boolean;
 };
 
-
-//================================================================
-// 2. CONTEXT CREATION & PROVIDER LOGIC FROM AuthContext
-//================================================================
 const AuthContext = createContext<AuthContextType>(null!);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+//================================================================
+// 2. AuthProvider COMPONENT
+//================================================================
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      const token = localStorage.getItem('token');
-      const userData = localStorage.getItem('user');
+    const initializeAuth = () => {
+      const storedToken = localStorage.getItem('token');
+      const storedUserData = localStorage.getItem('user');
 
-      if (token && userData) {
+      if (storedToken && storedUserData) {
         try {
-          const decoded = jwtDecode(token) as { exp?: number };
-          
+          const decoded = jwtDecode(storedToken) as { exp?: number };
           if (decoded.exp && decoded.exp * 1000 < Date.now()) {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            setUser(null);
-            navigate('/login');
-            return;
+          } else {
+            setUser(JSON.parse(storedUserData));
+            setToken(storedToken);
           }
-
-          setUser(JSON.parse(userData));
         } catch (error) {
-          console.error('Authentication error:', error);
+          console.error('Auth initialization error:', error);
           localStorage.removeItem('token');
           localStorage.removeItem('user');
-          setUser(null);
-          navigate('/login');
         }
       }
       setLoading(false);
     };
-
     initializeAuth();
-  }, [navigate]);
+  }, []);
 
   const login = (authData: AuthResponse) => {
     const userData: User = {
@@ -92,6 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
+    setToken(authData.token);
     navigate(`/${authData.role}/dashboard`);
   };
 
@@ -99,11 +95,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
+    setToken(null);
     navigate('/login');
   };
 
   const value: AuthContextType = {
     user,
+    token,
     login,
     logout,
     isAuthenticated: !!user,
@@ -118,7 +116,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 }
 
 //================================================================
-// 3. CUSTOM HOOK DEFINITION FROM AuthContext
+// 3. useAuth CUSTOM HOOK
 //================================================================
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -128,9 +126,8 @@ export function useAuth() {
   return context;
 }
 
-
 //================================================================
-// 4. AUTH PAGE COMPONENT (now the default export)
+// 4. AuthPage UI COMPONENT (Default Export)
 //================================================================
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
@@ -145,43 +142,30 @@ export default function AuthPage() {
   const [signupError, setSignupError] = useState("");
   const [signupSuccess, setSignupSuccess] = useState("");
 
-  const navigate = useNavigate();
-  const { login } = useAuth(); // This hook is now defined in the same file
+  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError("");
-
-    const trimmedUsername = loginUsername.trim();
-    const trimmedPassword = loginPassword.trim();
-
-    if (!trimmedUsername || !trimmedPassword) {
-      setLoginError("Please fill in all fields");
-      return;
-    }
 
     try {
       const response = await fetch("http://localhost:3001/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: trimmedUsername,
-          password: trimmedPassword,
+          username: loginUsername.trim(),
+          password: loginPassword.trim(),
         }),
       });
 
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Login failed");
-      }
-
-      // This call should now be completely error-free
+      if (!response.ok) throw new Error(data.error || "Login failed");
+      
       login({
         token: data.token,
         userId: data.userId,
         role: data.role,
-        username: trimmedUsername,
+        username: data.username,
         email: data.email || ""
       });
     } catch (error) {
@@ -194,24 +178,8 @@ export default function AuthPage() {
     setSignupError("");
     setSignupSuccess("");
 
-    const trimmedUsername = signupUsername.trim();
-    const trimmedEmail = signupEmail.trim();
-    const trimmedPassword = signupPassword.trim();
-    const trimmedConfirmPassword = signupConfirmPassword.trim();
-
-    if (!trimmedUsername || !trimmedEmail || !trimmedPassword || !signupRole) {
-      setSignupError("Please fill in all fields");
-      return;
-    }
-
-    if (trimmedPassword !== trimmedConfirmPassword) {
-      setSignupError("Passwords do not match");
-      return;
-    }
-
-    if (trimmedPassword.length < 6) {
-      setSignupError("Password must be at least 6 characters");
-      return;
+    if (signupPassword.trim() !== signupConfirmPassword.trim()) {
+      return setSignupError("Passwords do not match");
     }
 
     try {
@@ -219,31 +187,25 @@ export default function AuthPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: trimmedUsername,
-          email: trimmedEmail,
-          password: trimmedPassword,
+          username: signupUsername.trim(),
+          email: signupEmail.trim(),
+          password: signupPassword.trim(),
           role: signupRole,
         }),
       });
 
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Registration failed");
-      }
-
-      setSignupSuccess("Account created successfully! You can now log in.");
+      if (!response.ok) throw new Error(data.error || "Registration failed");
+      
+      setSignupSuccess("Account created! Please log in.");
       setActiveTab("login");
-      setSignupUsername("");
-      setSignupEmail("");
-      setSignupPassword("");
-      setSignupConfirmPassword("");
-      setSignupRole("");
+
     } catch (error) {
       setSignupError(error instanceof Error ? error.message : "Registration failed");
     }
   };
 
+  // --- THIS IS THE FULL UI CODE THAT WAS MISSING ---
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <Card className="w-full max-w-md shadow-xl">

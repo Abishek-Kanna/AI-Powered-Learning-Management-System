@@ -1,0 +1,67 @@
+[
+  {
+    "index": 1,
+    "question": "Which concept focuses on identifying the longest contiguous sequence of characters within a string where no two adjacent characters are the same?",
+    "user_answer": "B",
+    "correct_answer": "C",
+    "options": {
+      "A": "Finding All Anagrams in a String",
+      "B": "Roman to Integer",
+      "C": "Longest Substring Without Repeating Characters",
+      "D": "Repeated Substring Pattern"
+    },
+    "explanation": "Okay, let's break down why the correct answer is C) Longest Substring Without Repeating Characters and why B) Roman to Integer was incorrect.\n\nThe question asks you to identify the longest sequence of characters in a string where no two adjacent characters are identical. This describes a very specific problem in string manipulation.\n\nOption C, “Longest Substring Without Repeating Characters,” directly addresses this problem. It’s a classic coding challenge where you’re trying to find the longest portion of a string that has no consecutive duplicate characters.  The goal is to find the longest possible \"window\" of unique characters.\n\nOption B, “Roman to Integer,” deals with converting Roman numeral strings into their integer equivalent. This has absolutely nothing to do with finding sequences of characters within a string with a repetition constraint. It's a completely different problem altogether.\n\nOption A, “Finding All Anagrams in a String,” focuses on identifying strings that are rearrangements of another string. Again, this is a distinct problem from the one presented in the question.\n\nOption D, “Repeated Substring Pattern,” is a more advanced concept relating to pattern recognition, but doesn't directly align with the core requirement of finding the longest non-repeating sequence.\n\nTherefore, only option C is the correct answer because it precisely matches the definition provided in the question. It’s about finding the longest sequence of unique characters without any consecutive duplicates."
+  },
+  {
+    "index": 2,
+    "question": "The 'Repeated Substring Pattern' concept primarily aims to determine if a string can be constructed by repeatedly concatenating a substring. True or False?",
+    "user_answer": "B",
+    "correct_answer": "A",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "It depends on the string",
+      "D": "It's irrelevant"
+    },
+    "explanation": "Okay, let’s break down this question about the Repeated Substring Pattern.\n\nThe correct answer is A) True. The Repeated Substring Pattern is exactly about determining if a string can be formed by repeatedly applying the same substring to itself. For example, if you have the string \"ababab\", the Repeated Substring Pattern would identify \"ab\" as the substring that, when repeated, creates the entire string. It’s a fundamental concept in string algorithms and pattern recognition.\n\nYour answer of B) False is incorrect. Saying it’s false completely misunderstands the core of the Repeated Substring Pattern. It’s a direct and precise definition of the concept.\n\nThe ‘It depends on the string’ (C) option is also incorrect. The pattern *does* depend on the string; the specific substring that repeats is what needs to be identified. And ‘It’s irrelevant’ (D) is clearly wrong as the pattern itself is a significant concept.\n\nThink about it this way: The question asks if a string can be built by repeating a substring. That’s precisely what the Repeated Substring Pattern is designed to answer. Did you perhaps misunderstand the phrase \"constructed by repeatedly concatenating a substring?\""
+  },
+  {
+    "index": 3,
+    "question": "The algorithm for 'Finding All Anagrams in a String' typically involves counting character frequencies using a hash map. What is the main purpose of this step?",
+    "user_answer": "B",
+    "correct_answer": "D",
+    "options": {
+      "A": "To sort the pattern string",
+      "B": "To identify the longest substring",
+      "C": "To check if the pattern can be formed by repeated substrings",
+      "D": "To determine if the pattern exists in the string"
+    },
+    "explanation": "Okay, let’s break down why the correct answer is D and why your initial answer was incorrect.\n\nThe algorithm for finding all anagrams in a string uses character frequency counting with a hash map to efficiently determine if a given pattern string can be formed from the main string.  Essentially, the hash map creates a profile of the character counts in the pattern string.\n\nLet’s examine why option D, “To determine if the pattern exists in the string,” is the correct answer. After creating the character frequency map of the pattern string, you compare this map to the character frequency map of the main string. If the two maps are identical, it means the main string contains all the characters of the pattern string with the same frequencies. This is precisely what indicates the pattern exists within the string.\n\nNow, let’s look at why your initial answer, B) “To identify the longest substring,” is wrong.  Identifying the longest substring is a completely different task. The frequency counting step isn't about finding the longest substring; it's about determining if the pattern *can* be formed at all, regardless of its length. The frequency map is a building block for checking if the pattern's character counts align with those in the text.\n\nThink of it this way:  You don't need to find the longest substring to know if a particular anagram exists. You just need to know if the character counts match up.  Does the string have the right number of 'a's, 'b's, 'c's, etc., to make up the pattern?  That’s what the frequency counting accomplishes."
+  },
+  {
+    "index": 6,
+    "question": "The 'Number of Matching Subsequences' problem utilizes a sliding window approach. What is the core logic of this approach?",
+    "user_answer": "B",
+    "correct_answer": "D",
+    "options": {
+      "A": "To sort the input string",
+      "B": "To iterate through the string from both ends",
+      "C": "To check if the string can be constructed by repeated substrings",
+      "D": "To find the longest substring that is an anagram"
+    },
+    "explanation": "Okay, let’s break down why the correct answer is D and why your initial answer was incorrect.\n\nThe 'Number of Matching Subsequences' problem, when solved with a sliding window approach, fundamentally relies on identifying anagrams. A sliding window is used to efficiently check if a smaller substring within the input string is an anagram of a target subsequence. The core logic is to move the window along the string, comparing the characters within the window to the characters in the subsequence you’re trying to match. If the characters within the window form an anagram of the subsequence, you've found a match.\n\nOption B, “To iterate through the string from both ends,” is completely incorrect. Iterating from both ends wouldn't provide any meaningful way to identify anagrams or matching subsequences. It would be a random approach with no logical connection to the problem's solution.\n\nOption D, “To find the longest substring that is an anagram,” accurately describes the sliding window strategy. You’re essentially searching for anagrams, and the sliding window allows you to efficiently check substrings for anagram properties.\n\nOptions A and C are also incorrect. Sorting the input string wouldn't directly solve the problem of identifying matching subsequences. Checking if the string can be constructed by repeated substrings is not a standard or efficient sliding window technique for this specific problem.\n\nLet me know if you'd like to work through an example of how a sliding window is used to solve this type of problem."
+  },
+  {
+    "index": 10,
+    "question": "The 'Palindrome Number' concept primarily checks if an integer is a palindrome. What is the simplest way to determine this?",
+    "user_answer": "B",
+    "correct_answer": "A",
+    "options": {
+      "A": "To reverse the integer and compare it to the original",
+      "B": "To use a complex mathematical formula",
+      "C": "To use recursion",
+      "D": "To sort the digits"
+    },
+    "explanation": "Okay, let's break down why the correct answer is A and why your initial answer was incorrect.\n\nThe question asks for the simplest way to determine if a number is a palindrome. A palindrome reads the same forwards and backward.\n\nOption A, “To reverse the integer and compare it to the original,” is the simplest and most direct approach.  You essentially take the number, flip its digits, and then check if the flipped version is the same as the original number. This is a very intuitive and easy-to-understand method.\n\nOption B, “To use a complex mathematical formula,” is completely unnecessary and inefficient for this problem. Palindrome checks don't require complicated math. Using a formula would be significantly more difficult to implement and wouldn't be the simplest solution.\n\nOption C, “To use recursion,” is also overkill. While recursion *could* be used, it introduces unnecessary complexity. A simple iterative approach (like reversing the number) is much easier to understand and implement.\n\nOption D, “To sort the digits,” is completely wrong. Sorting the digits wouldn't help you determine if the number is a palindrome; it would just rearrange the digits.\n\nThe core concept of a palindrome is about symmetry. Reversing the number and comparing it to the original directly reflects this concept.\n\nTherefore, option A is the correct and simplest approach.  It's a fundamental and straightforward way to check for palindromes."
+  }
+]

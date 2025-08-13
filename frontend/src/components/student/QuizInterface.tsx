@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useStudySession } from '@/hooks/useStudySession';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
+import { useAuth } from '../auth/auth';
 
+// TypeScript Interfaces
 interface QuizQuestion {
   question: string;
   options: {
@@ -45,9 +47,12 @@ interface TutorExplanation {
 }
 
 const QuizInterface: React.FC = () => {
+  // Hooks
   const navigate = useNavigate();
   const { startSession, endSession, isActive, duration, formatDuration } = useStudySession();
+  const { user } = useAuth(); // Get the logged-in user from the auth context
 
+  // Component State
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [availableQuizzes, setAvailableQuizzes] = useState<string[]>([]);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
@@ -59,15 +64,14 @@ const QuizInterface: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Tutor State
   const [showTutorExplanations, setShowTutorExplanations] = useState(false);
   const [tutorExplanations, setTutorExplanations] = useState<TutorExplanation[]>([]);
   const [tutorLoading, setTutorLoading] = useState(false);
   const [tutorError, setTutorError] = useState<string | null>(null);
-
-  // --- ADDED STATE ---
-  // This holds the unique ID for each quiz attempt to fetch the correct explanation.
   const [currentAttemptId, setCurrentAttemptId] = useState<string | null>(null);
 
+  // Static Data
   const categories: QuizCard[] = [
     { title: 'Python',          description: 'Python programming quizzes',   icon: '🐍', color: 'bg-blue-100',    folder: 'python' },
     { title: 'Java',            description: 'Java programming quizzes',     icon: '☕', color: 'bg-red-100',     folder: 'java'   },
@@ -76,6 +80,7 @@ const QuizInterface: React.FC = () => {
     { title: 'Mixed Materials', description: 'Various study material quizzes', icon: '📚', color: 'bg-purple-100', folder: 'mixed'  }
   ];
 
+  // Data Fetching Functions
   const fetchQuizList = async (folder: string) => {
     setLoading(true); setError(null);
     try {
@@ -114,7 +119,7 @@ const QuizInterface: React.FC = () => {
       setShowTutorExplanations(false);
       setTutorExplanations([]);
       setTutorError(null);
-      setCurrentAttemptId(null); // Reset attempt ID on new quiz start
+      setCurrentAttemptId(null);
       
       if (selectedCategory) {
         startSession({
@@ -131,12 +136,12 @@ const QuizInterface: React.FC = () => {
     }
   };
 
-  // --- UPDATED FUNCTION ---
-  // This function now gets a unique attemptId from the backend and uses it for polling.
+  // AI Tutor Function
   const triggerAiTutor = async () => {
     const currentCategoryFolder = categories.find(c => c.title === selectedCategory)?.folder;
-    if (!currentQuiz || !currentCategoryFolder) {
-      setTutorError('No quiz or category selected');
+    // Use the user object from the useAuth hook
+    if (!currentQuiz || !currentCategoryFolder || !user?.id) {
+      setTutorError('No quiz, category, or user ID available.');
       return;
     }
 
@@ -151,12 +156,14 @@ const QuizInterface: React.FC = () => {
         body: JSON.stringify({
           quizName: currentQuiz,
           userAnswers: userAnswers,
-          subject: currentCategoryFolder
+          subject: currentCategoryFolder,
+          userId: user.id // Send the correct user ID
         }),
       });
 
       if (!triggerRes.ok) {
-        throw new Error('Failed to trigger AI tutor process.');
+        const errorData = await triggerRes.json();
+        throw new Error(errorData.error || 'Failed to trigger AI tutor process.');
       }
 
       const triggerData = await triggerRes.json();
@@ -166,14 +173,14 @@ const QuizInterface: React.FC = () => {
         throw new Error('Could not get a valid attempt ID from the server.');
       }
       
-      setCurrentAttemptId(attemptId); // Store the ID for polling
+      setCurrentAttemptId(attemptId);
 
       const pollInterval = 5000;
       const pollTimeout = 180000;
 
       const pollId = setInterval(async () => {
         try {
-          const res = await fetch(`http://localhost:3001/api/tutor/explanations/${encodeURIComponent(currentQuiz)}/${attemptId}`);
+          const res = await fetch(`http://localhost:3001/api/tutor/explanations/${user.id}/${encodeURIComponent(currentQuiz)}/${attemptId}`);
           if (res.ok) {
             const explanations = await res.json();
             setTutorExplanations(explanations);
@@ -199,6 +206,7 @@ const QuizInterface: React.FC = () => {
     }
   };
 
+  // UI Navigation and Event Handlers
   const handleCardSelect = (cat: QuizCard) => {
     setSelectedCategory(cat.title);
     setAvailableQuizzes([]);
@@ -275,8 +283,6 @@ const QuizInterface: React.FC = () => {
     const score = answers.filter(a => a.isCorrect).length;
     const percentage = Math.round((score / questions.length) * 100);
     
-    await saveUserAnswers(answers);
-    
     if (currentQuiz && selectedCategory) {
       await endSession({
         sessionType: 'quiz',
@@ -296,30 +302,7 @@ const QuizInterface: React.FC = () => {
       setUserAnswers(userAnswers.slice(0, currentQuestion));
     }
   };
-
-  const saveUserAnswers = async (answers: UserAnswer[]) => {
-    try {
-      const score = answers.filter(a => a.isCorrect).length;
-      const payload = {
-        pdfName: currentQuiz,
-        answers: answers,
-        timestamp: new Date().toISOString(),
-        totalScore: score,
-        totalQuestions: questions.length,
-        score: Math.round((score / questions.length) * 100),
-        category: categories.find(c => c.title === selectedCategory)?.folder || 'mixed'
-      };
-
-      await fetch('http://localhost:3001/api/user-answers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    } catch (err) {
-      console.error('Failed to save user answers:', err);
-    }
-  };
-
+  
   const restartQuiz = async () => {
     if (currentQuiz && selectedCategory) {
       await endSession({
@@ -346,6 +329,7 @@ const QuizInterface: React.FC = () => {
     }
   };
 
+  // Derived State for Rendering
   const currentQ = questions[currentQuestion];
   const score = userAnswers.filter(a => a.isCorrect).length;
   const progress = questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
