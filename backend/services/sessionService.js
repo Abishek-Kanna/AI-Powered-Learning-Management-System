@@ -112,39 +112,51 @@ exports.saveStudySession = (data) => {
 
 // --- GET FUNCTIONS for stats ---
 
+// MODIFIED: Counts unique quizzes completed.
 exports.getUserQuizStats = async (userId) => {
-    if (!userId) return { quizzesCompleted: 0, totalQuizzes: 0, categoryBreakdown: {} };
+    if (!userId) return { quizzesCompleted: 0 };
     const userQuizDir = path.join(userAnswersBaseDir, userId);
-    if (!fs.existsSync(userQuizDir)) return { quizzesCompleted: 0, totalQuizzes: 0, categoryBreakdown: {} };
+    if (!fs.existsSync(userQuizDir)) return { quizzesCompleted: 0 };
 
     const files = await readdir(userQuizDir);
-    const quizzesCompleted = files.length;
+    const uniqueQuizNames = new Set();
+    
+    for (const file of files) {
+        const session = await safeReadJSON(path.join(userQuizDir, file));
+        if (session && session.pdfName) {
+            uniqueQuizNames.add(session.pdfName);
+        }
+    }
+    
     return { 
-        quizzesCompleted, 
-        totalQuizzes: Math.max(quizzesCompleted, 10),
-        categoryBreakdown: {} 
+        quizzesCompleted: uniqueQuizNames.size
     };
 };
 
+// MODIFIED: Counts unique flashcard decks and total cards reviewed.
 exports.getUserFlashcardStats = async (userId) => {
-    if (!userId) return { flashcardsReviewed: 0, totalFlashcards: 0 };
+    if (!userId) return { decksReviewed: 0, cardsReviewedTotal: 0 };
     const userFlashcardDir = path.join(flashcardSessionsBaseDir, userId);
-    if (!fs.existsSync(userFlashcardDir)) return { flashcardsReviewed: 0, totalFlashcards: 0 };
+    if (!fs.existsSync(userFlashcardDir)) return { decksReviewed: 0, cardsReviewedTotal: 0 };
 
     const files = await readdir(userFlashcardDir);
-    let flashcardsReviewed = 0;
+    const uniqueDeckNames = new Set();
+    let cardsReviewedTotal = 0;
+
     for (const file of files) {
         const session = await safeReadJSON(path.join(userFlashcardDir, file));
-        if (session && session.cardsReviewed) {
-            flashcardsReviewed += session.cardsReviewed;
+        if (session) {
+            if(session.flashcardName) uniqueDeckNames.add(session.flashcardName);
+            if (session.cardsReviewed) cardsReviewedTotal += session.cardsReviewed;
         }
     }
     return { 
-        flashcardsReviewed, 
-        totalFlashcards: Math.max(flashcardsReviewed, 50)
+        decksReviewed: uniqueDeckNames.size, 
+        cardsReviewedTotal 
     };
 };
 
+// MODIFIED: Slices recent activity to the last 4 sessions.
 exports.getUserActivityStats = async (userId) => {
     if (!userId) return { hoursStudied: 0, studyStreak: 0, recentActivity: [] };
 
@@ -187,7 +199,7 @@ exports.getUserActivityStats = async (userId) => {
         }
     }
     
-    const recentActivity = allSessions.slice(0, 10).map(s => ({
+    const recentActivity = allSessions.slice(0, 4).map(s => ({ // <-- CHANGED to 4
         type: s.type,
         name: s.pdfName || s.flashcardName,
         score: s.score,

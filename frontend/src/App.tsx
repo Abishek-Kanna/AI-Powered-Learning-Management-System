@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AuthPage, { AuthProvider } from './components/auth/auth'; 
+import AuthPage, { AuthProvider } from './components/auth/auth';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import StudentDashboard from './components/student/StudentDashboard';
 import TeacherDashboard from './components/teacher/TeacherDashboard';
@@ -11,6 +11,8 @@ import StudyMaterials from './components/student/StudyMaterials';
 import StudentProgress from './components/student/StudentProgress';
 import MaterialUpload from './components/teacher/MaterialUpload';
 import CodingPractice from './components/student/CodingPractice';
+// --- 1. Import the AnalyticsDashboard component ---
+import AnalyticsDashboard from './components/teacher/AnalyticsDashboard';
 
 // Error Boundary Component (no changes needed here)
 class QuizErrorBoundary extends React.Component<any, any> {
@@ -43,11 +45,11 @@ function App() {
             <Route path="/" element={<AuthPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/login" element={<AuthPage />} />
-            
+
             {/* Protected routes that require a user to be logged in */}
             <Route element={<ProtectedRoute />}>
+              {/* Student Routes */}
               <Route path="/student/dashboard" element={<StudentDashboard />} />
-              <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
               <Route path="/quiz" element={
                 <QuizErrorBoundary>
                   <QuizInterface />
@@ -58,7 +60,13 @@ function App() {
               <Route path="/student/study-materials" element={<StudyMaterials />} />
               <Route path="/student/progress" element={<StudentProgress />} />
               <Route path="/student/code" element={<CodingPractice />} />
+
+              {/* Teacher Routes */}
+              <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
               <Route path="/teacher/material-upload" element={<MaterialUpload />} />
+
+              {/* --- 2. Add the new route for the analytics dashboard --- */}
+              <Route path="/teacher/analytics" element={<AnalyticsDashboard />} />
             </Route>
           </Routes>
         </div>
